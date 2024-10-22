@@ -1,0 +1,39 @@
+para empezar el proyecto
+
+npm create vite@latest   .... usamos react con typescript
+
+    para iniciar proyecto npm install luego npm run dev
+
+npm i -D tailwindcss postcss autoprefixer   .... ocupamos tailwind para el maquetado css del proyecto
+
+ESTE NPX te permite ejecuar algunos paquetes sin instalar nada
+npx tailwindcss init -p   .....   se hace para crear 2 archivos de configuracion de tailwind
+
+npm i react-router-dom    ... en vite para usar hay que instalarlo para direccionarlo a varias paguinas
+
+
+
+
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <h1 className='text-6xl'>Hola mundo</h1> 
+  </React.StrictMode>,
+
+
+
+
+  /** @type {import('tailwindcss').Config} */
+export default {
+  content: ["index.html", "./src/**/*.{js, ts, jsx, tsx}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
