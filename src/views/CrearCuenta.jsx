@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
 import Alerta from '../components/Alerta';
 import clienteAxios from '../config/axios';
 import felmanImage from '../img/felman.png';
 
 export default function CrearCuenta() {
-    const [nombre, setNombre] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [repetirPassword, setRepetirPassword] = useState('');
+    const [nombre, setNombre] = useState('jose');
+    const [email, setEmail] = useState('jose@jose.com');
+    const [password, setPassword] = useState('123456');
+    const [repetirPassword, setRepetirPassword] = useState('123456');
 
     const [errorInput, setErrorInput] = useState({
         nombre: false,
@@ -18,9 +18,17 @@ export default function CrearCuenta() {
     });
 
     const [alerta, setAlerta] = useState({});
+    const [cargando, setCargando] = useState(false); // Nuevo estado para controlar la carga
+    const navigate = useNavigate(); // Inicializar useNavigate
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log('click boton')
+
+
+                // Activar estado de carga
+                setCargando(true);
+
 
         // Resetear los errores
         setErrorInput({
@@ -34,12 +42,14 @@ export default function CrearCuenta() {
         if (nombre.trim() === '') {
             setAlerta({ msg: 'Nombre está vacío', error: true });
             setErrorInput((prev) => ({ ...prev, nombre: true }));
+            setCargando(false); // Desactivar carga
             return;
         }
 
         if (email.trim() === '') {
             setAlerta({ msg: 'Email está vacío', error: true });
             setErrorInput((prev) => ({ ...prev, email: true }));
+            setCargando(false); // Desactivar carga
             return;
         }
 
@@ -50,12 +60,14 @@ export default function CrearCuenta() {
                 password: true,
                 repetirPassword: true,
             }));
+            setCargando(false); // Desactivar carga
             return;
         }
 
         if (password !== repetirPassword) {
             setAlerta({ msg: 'Los Password no son iguales', error: true });
             setErrorInput({ password: true, repetirPassword: true });
+            setCargando(false); // Desactivar carga
             return;
         }
 
@@ -65,6 +77,7 @@ export default function CrearCuenta() {
                 error: true,
             });
             setErrorInput({ password: true, repetirPassword: true });
+            setCargando(false); // Desactivar carga
             return;
         }
 
@@ -75,14 +88,30 @@ export default function CrearCuenta() {
         try {
             await clienteAxios.post('/usuarios', { nombre, email, password });
             setAlerta({
-                msg: 'Creado Correctamente, revisa tu email',
+                msg: 'Usuario Creado Correctamente, revisa tu email para confirmar cuenta, Seras redireccionado al LOGIN',
                 error: false,
             });
+            // Redirigir a la pantalla de inicio de sesión después de 1 segundo
+            setTimeout(() => {
+                navigate('/login'); // Cambiar a la ruta de inicio de sesión
+            }, 5000);
         } catch (error) {
-            setAlerta({
-                msg: error.response.data.msg,
-                error: true,
-            });
+            if (!error.response) {
+                // Aquí se maneja el error de red
+                setAlerta({
+                    msg: 'No se puede conectar al servidor. Por favor, intenta más tarde.',
+                    error: true,
+                });
+            } else {
+                // Manejo de errores que vienen de la respuesta de la API
+                setAlerta({
+                    msg: error.response.data.msg,
+                    error: true,
+                });
+            }
+        } finally {
+            // Desactivar carga al final
+            setCargando(false);
         }
     };
 
@@ -105,13 +134,14 @@ export default function CrearCuenta() {
             >
                 <form onSubmit={handleSubmit} className="mb-5">
                 <label
-                        className="block text-6xl font-semibold italic"
+                        className="block text-4xl font-semibold italic"
                         style={{
                             color: '#e20613',           // Color rojo similar al logo
                             fontFamily: 'sans-serif',   // Fuente sans-serif
                              // Minúsculas para coincidir con el logo
                             bottom: '10px',             // Posicionado hacia la parte inferior
-                            right: '10px'               // Posicionado hacia la derecha
+                            right: '10px' ,              // Posicionado hacia la derecha
+                            textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)' // Sombra suave
                         }}
                     >
                         Crear Cuenta
@@ -138,6 +168,7 @@ export default function CrearCuenta() {
                             placeholder="Email de Registro"
                             className={`${errorInput.email ? 'bg-red-300' : 'bg-gray-50'} border w-full p-3 mt-3 rounded-xl`}
                             value={email}
+                            autoComplete="username" // Agrega el atributo autoComplete
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
@@ -151,6 +182,7 @@ export default function CrearCuenta() {
                             placeholder="Tu Password"
                             className={`${errorInput.password ? 'bg-red-300' : 'bg-gray-50'} border w-full p-3 mt-3 rounded-xl`}
                             value={password}
+                            autoComplete="new-password"
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
@@ -164,6 +196,7 @@ export default function CrearCuenta() {
                             placeholder="Repite tu Password"
                             className={`${errorInput.repetirPassword ? 'bg-red-300' : 'bg-gray-50'} border w-full p-3 mt-3 rounded-xl`}
                             value={repetirPassword}
+                            autoComplete="new-password"
                             onChange={(e) => setRepetirPassword(e.target.value)}
                         />
                     </div>
@@ -171,8 +204,8 @@ export default function CrearCuenta() {
                     <div className="flex justify-center">
                         <input
                             type="submit"
-                            value="Crear Cuenta"
-                            className="bg-red-500 w-1/2 py-3 px-10 rounded-xl text-white uppercase font-bold mt-5 hover:cursor-pointer hover:bg-red-600"
+                            value={cargando ? 'Creando...' : 'Crear Cuenta'} // Cambiar el texto del botón
+                            className={`bg-red-500 w-1/2 py-3 px-10 rounded-xl text-white uppercase font-bold mt-5 hover:cursor-pointer hover:bg-red-600 ${cargando ? 'opacity-50 cursor-not-allowed' : ''}`} // Inhabilitar el botón
                         />
                     </div>
                 </form>

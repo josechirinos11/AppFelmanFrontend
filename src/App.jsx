@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import AppLayout from './layouts/AppLayout'
 import DashboardView from './views/DashboardView'
@@ -7,8 +8,10 @@ import OlvidePassword from './views/OlvidePassword'
 import Login from './views/Login'
 
 
-export default function App() {
 
+
+
+const App = () => {
     return (
         <BrowserRouter>
             <Routes>
@@ -24,4 +27,6 @@ export default function App() {
             </Routes>
         </BrowserRouter>
     )
-}
+  };
+  
+  export default App;

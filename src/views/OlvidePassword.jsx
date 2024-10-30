@@ -106,13 +106,14 @@ export default function OlvidePassword() {
                 <form onSubmit={handleSubmit} className="mb-5">
                     
                 <label
-                        className="block text-6xl font-semibold italic"
+                        className="block text-4xl font-semibold italic"
                         style={{
                             color: '#e20613',           // Color rojo similar al logo
                             fontFamily: 'sans-serif',   // Fuente sans-serif
                             
                             bottom: '10px',             // Posicionado hacia la parte inferior
-                            right: '10px'               // Posicionado hacia la derecha
+                            right: '10px' ,               // Posicionado hacia la derecha
+                            textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)' // Sombra suave
                         }}
                     >
                         Recuperar Password
