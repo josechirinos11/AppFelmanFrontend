@@ -1,0 +1,109 @@
+/* NavMenu.css */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    
+    
+  }
+  
+  /* Logo */
+  .logo {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .logo-image {
+    width: 80px;
+    height: 40px;
+    
+  }
+  
+  /* Menú de perfil */
+/* Menú de perfil */
+.profile-menu {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 150px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 10;
+    text-align: center; /* Para centrar el texto */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el contenido horizontalmente */
+  }
+  
+  /* Imagen de perfil */
+  .profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  
+  /* Barra de búsqueda */
+  .search-bar {
+    position: relative;
+    flex: 1;
+    max-width: 400px;
+  }
+  
+  .search-bar input {
+    width: 100%;
+    padding: 8px 30px 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+  }
+  
+  .search-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+  }
+  
+  /* Menú de opciones */
+  .options-menu {
+    position: relative;
+  }
+  
+  .options-icon {
+    cursor: pointer;
+    font-size: 20px;
+    color: #333;
+  }
+  
+  /* Dropdown del menú de opciones */
+  .dropdown-menu {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    width: 120px;
+  }
+  
+  .dropdown-menu button {
+    width: 100%;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu button:hover {
+    background-color: #f0f0f0;
+  }
+  

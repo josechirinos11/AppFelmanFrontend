@@ -1,20 +1,24 @@
 import { useState } from 'react';
-import { Link, useNavigate  } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Alerta from '../components/Alerta';
 import clienteAxios from '../config/axios';
 import felmanImage from '../img/felman.png';
+import { useAuth } from '../config/AuthContext';
 
 export default function Login() {
- 
+    const { login } = useAuth(); // Extraer la función login del contexto
+
     const [email, setEmail] = useState('jose@jose.com');
     const [password, setPassword] = useState('123456');
-   
+
+
+
 
     const [errorInput, setErrorInput] = useState({
-     
+
         email: false,
         password: false,
-      
+
     });
 
     const [alerta, setAlerta] = useState({});
@@ -23,18 +27,18 @@ export default function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-                // Activar estado de carga
-                setCargando(true);
+        // Activar estado de carga
+        setCargando(true);
         // Resetear los errores
         setErrorInput({
-           
+
             email: false,
             password: false,
-           
+
         });
 
         // Verificaciones de campos vacíos
-      
+
 
         if (email.trim() === '') {
             setAlerta({ msg: 'Email está vacío', error: true });
@@ -53,9 +57,9 @@ export default function Login() {
             return;
         }
 
-        
 
-     
+
+
 
 
         // Si no hay errores, limpiar alerta
@@ -63,16 +67,43 @@ export default function Login() {
 
         // Crear el usuario en la API
         try {
-            await clienteAxios.post('/usuarios/login', { email, password });
+            const response = await clienteAxios.post('/usuarios/login', { email, password });
             setAlerta({
                 msg: 'Cargando datos...............',
                 error: false,
             });
-           
-                navigate('/'); // Cambiar a la ruta de inicio de sesión
-           
+            const data = response.data;
+            console.log(data);
+            const { token, nombre: nombreUSER, email: emailUSER } = data;
+            //  const expirationInMinutes = 60; // Por ejemplo, 1 hora
+            //   const expirationDate = new Date(Date.now() + expirationInMinutes * 60000);
+
+
+            login(token, 60, { nombreUSER, emailUSER })
+            //  localStorage.setItem('token', data.token);
+            //  localStorage.setItem('tokenExpiration', expirationDate);
+            console.log(nombreUSER)
+            console.log(emailUSER)
+            console.log("Token guardado en localStorage:", localStorage.getItem('token'));
+            console.log("fecha:", localStorage.getItem('tokenExpiration'));
+
+            if (data.token) {
+
+                console.log('dentro del if')
+
+                navigate('/mi-cuenta'); // Redirigir a una ruta privada
+            } else {
+                console.log('setAlerta');
+                // Manejar error
+                setAlerta({
+                    msg: 'Error de autenticación',
+                    error: false,
+                });
+            }
+
         } catch (error) {
             if (!error.response) {
+                console.log(error)
                 // Aquí se maneja el error de red
                 setAlerta({
                     msg: 'No se puede conectar al servidor. Por favor, intenta más tarde.',
@@ -115,7 +146,7 @@ export default function Login() {
                         style={{
                             color: '#e20613',           // Color rojo similar al logo
                             fontFamily: 'sans-serif',   // Fuente sans-serif
-                            
+
                             bottom: '10px',             // Posicionado hacia la parte inferior
                             right: '10px',               // Posicionado hacia la derecha
                             textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)' // Sombra suave
@@ -159,7 +190,7 @@ export default function Login() {
                             value={cargando ? 'Cargando datos...' : 'Iniciar Sesion'} // Cambiar el texto del botón
                             className={`bg-red-500 w-1/2 py-3 px-10 rounded-xl text-white uppercase font-bold mt-5 hover:cursor-pointer hover:bg-red-600 ${cargando ? 'opacity-50 cursor-not-allowed' : ''}`} // Inhabilitar el botón
                             disabled={cargando} // Agregar esta línea para inhabilitar el botón
-                       />
+                        />
                     </div>
                 </form>
 

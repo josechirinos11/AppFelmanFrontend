@@ -1,9 +1,29 @@
-import { useState } from 'react';
+
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import AuthContext from '../config/AuthContext';
 
 import felmanImage from '../img/felman.png';
 
 export default function DashboardView() {
+    const { token } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // Leer el token desde localStorage al cargar el componente
+       
+        
+        // Si el token existe, redirige al usuario a la página privada
+        if (token) {
+            navigate('/mi-cuenta'); // Ajusta la ruta según tus necesidades
+        } else {
+            // Si no hay token, puedes redirigir al usuario a la página de login o hacer algo más
+            navigate('/');
+        }
+    }, [token, navigate]);
+
 
 
     return (

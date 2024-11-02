@@ -1,58 +1,72 @@
-import { Fragment } from 'react'
-import { Popover, Transition } from '@headlessui/react'
-import { Bars3Icon } from '@heroicons/react/20/solid'
-import { Link } from 'react-router-dom'
-import { User } from '../types'
-import { useQueryClient } from '@tanstack/react-query'
+// NavMenu.jsx
+import React, { useState } from 'react';
+import { FaSearch, FaEllipsisV } from 'react-icons/fa'; // Importa los íconos necesarios
+import '../css/NavMenu.css'; // Para estilos personalizados
+import felmanImage from '../img/felman.png';
+import usuarioIMG from '../img/usuario.png'
+import { useAuth } from '../config/AuthContext';
 
-type NavMenuProps = {
-  name: User['name']
-}
+const NavMenu = () => {
+  const { logout } = useAuth(); // Extraer la función login del contexto
+  const UserLocalstorage = localStorage.getItem('usuario')
+// Convertir la cadena JSON de nuevo a un objeto
+const usuarioObjeto = UserLocalstorage ? JSON.parse(UserLocalstorage) : null;
+console.log(usuarioObjeto)
 
-export default function NavMenu({name} : NavMenuProps) {
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [isOptionsMenuOpen, setIsOptionsMenuOpen] = useState(false);
 
-  const queryClient = useQueryClient()
-  const logout = () => {
-    localStorage.removeItem('AUTH_TOKEN')
-    queryClient.invalidateQueries({queryKey: ['user']})
-  }
+  // Funciones para abrir/cerrar los menús
+  const toggleProfileMenu = () => setIsProfileMenuOpen(!isProfileMenuOpen);
+  const toggleOptionsMenu = () => setIsOptionsMenuOpen(!isOptionsMenuOpen);
+
+
+  const HandleCerrarSesion = () => {
+    console.log('Cerrarndo sesion')
+    logout()
+    
+};
 
   return (
-    <Popover className="relative">
-      <Popover.Button className="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 p-1 rounded-lg bg-purple-400">
-        <Bars3Icon className='w-8 h-8 text-white ' />
-      </Popover.Button>
+    <nav className="nav-menu ">
+      {/* Logo con menú desplegable */}
 
-      <Transition
-        as={Fragment}
-        enter="transition ease-out duration-200"
-        enterFrom="opacity-0 translate-y-1"
-        enterTo="opacity-100 translate-y-0"
-        leave="transition ease-in duration-150"
-        leaveFrom="opacity-100 translate-y-0"
-        leaveTo="opacity-0 translate-y-1"
-      >
-        <Popover.Panel className="absolute left-1/2 z-10 mt-5 flex w-screen lg:max-w-min -translate-x-1/2 lg:-translate-x-48">
-          <div className="w-full lg:w-56 shrink rounded-xl bg-white p-4 text-sm font-semibold leading-6 text-gray-900 shadow-lg ring-1 ring-gray-900/5">
-            <p className='text-center'>Hola: {name}</p>
-            <Link
-              to='/profile'
-              className='block p-2 hover:text-purple-950'
-            >Mi Perfil</Link>
-            <Link
-              to='/'
-              className='block p-2 hover:text-purple-950'
-            >Mis Proyectos</Link>
-            <button
-              className='block p-2 hover:text-purple-950'
-              type='button'
-              onClick={logout}
-            >
-              Cerrar Sesión
-            </button>
+ 
+      <div className="logo" onClick={toggleProfileMenu}>
+        <img src={felmanImage} alt="Logo" className="logo-image" />
+        {isProfileMenuOpen && (
+          <div className="profile-menu">
+            <img src={usuarioIMG} alt="User" className="profile-image" />
+            <p>Cargo del Usuario</p>
+            <p>{usuarioObjeto.nombreUSER}</p>
+            <p>{usuarioObjeto.emailUSER}</p>
+            <button>Setting</button>
+            <button onClick={HandleCerrarSesion}>Cerrar Sesion</button>
           </div>
-        </Popover.Panel>
-      </Transition>
-    </Popover>
-  )
-}
+        )}
+      </div>
+
+      {/* Barra de búsqueda */}
+      <div className="search-bar">
+        <input type="text" placeholder="Buscar..." />
+        <FaSearch className="search-icon" />
+      </div>
+
+      {/* Botón de opciones con menú desplegable */}
+      <div className="options-menu">
+        <FaEllipsisV onClick={toggleOptionsMenu} className="options-icon" />
+        {isOptionsMenuOpen && (
+          <div className="dropdown-menu">
+            <button>Item 1</button>
+            <button>Item 2</button>
+            <button>Item 3</button>
+            <button>Item 4</button>
+            <button>Item 5</button>
+          </div>
+        )}
+      </div>
+    </nav>
+  );
+};
+
+export default NavMenu;
