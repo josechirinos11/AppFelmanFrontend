@@ -17,9 +17,9 @@ console.log(usuarioObjeto)
  
   return (
     <div>
-      <text>
+      <p>
         Micuenta
-      </text>
+      </p>
       {(UserLocalstorage) ? (
                 <>
                     <p>Nombre: {usuarioObjeto.nombreUSER}</p>

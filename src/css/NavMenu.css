@@ -26,7 +26,7 @@
     position: absolute;
     top: 50px;
     left: 0;
-    width: 150px;
+    width: 250px;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -72,7 +72,19 @@
   
   /* Menú de opciones */
   .options-menu {
-    position: relative;
+    position: relative; /* Asegura que el menú desplegable se posicione dentro del contenedor */
+    float: right;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    width: 300px;
+    background-color: white;
+    
+    
+    z-index: 10;
   }
   
   .options-icon {
@@ -82,16 +94,19 @@
   }
   
   /* Dropdown del menú de opciones */
-  .dropdown-menu {
-    position: absolute;
-    top: 30px;
-    right: 0;
+  .dropdown-item {
+    
+   
+    
     background-color: #fff;
-    border: 1px solid #ddd;
+    border: px solid #ddd;
     border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(247, 76, 76, 0.5);
     z-index: 10;
-    width: 120px;
+    width: 'auto';
+  }
+  .sub-dropdown-menu {
+    background-color: rgb(239 68 68);
   }
   
   .dropdown-menu button {
@@ -106,4 +121,29 @@
   .dropdown-menu button:hover {
     background-color: #f0f0f0;
   }
-  
+  .felman-button {
+width: 200px;
+margin: 10px;
+    background-color: rgb(239 68 68); /* Reemplaza con el color del logo de Felman */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de fuente */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    transition: background-color 0.3s; /* Transición suave al cambiar el color de fondo */
+}
+
+.felman-button:hover {
+    background-color: #C0392B; /* Color al pasar el mouse, usa un color más oscuro o diferente */
+}
+.custom-icon {
+  color: rgb(239, 68, 68); /* Cambia el color del ícono */
+  font-size: 24px; /* Ajusta el tamaño del ícono si es necesario */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el ícono */
+}
+
+/* Otras propiedades para mejorar el aspecto */
+.custom-icon:hover {
+  color: rgb(220, 34, 34); /* Color al pasar el mouse, opcional */
+}
