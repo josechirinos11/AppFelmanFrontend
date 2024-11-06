@@ -72,6 +72,9 @@ export default function Login() {
                 msg: 'Cargando datos...............',
                 error: false,
             });
+            console.log('desde try');
+            console.log('Backend URL:', `${import.meta.env.VITE_BACKEND_URL}/felman/usuarios`);
+
             const data = response.data;
             console.log(data);
             const { token, nombre: nombreUSER, email: emailUSER } = data;
@@ -109,6 +112,10 @@ export default function Login() {
                     msg: 'No se puede conectar al servidor. Por favor, intenta más tarde.',
                     error: true,
                 });
+
+                console.log('desde el error');
+                console.log('Backend URL:', `${import.meta.env.VITE_BACKEND_URL}/felman/usuarios`);
+    
             } else {
                 // Manejo de errores que vienen de la respuesta de la API
                 setAlerta({
