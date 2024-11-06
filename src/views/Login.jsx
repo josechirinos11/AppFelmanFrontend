@@ -73,7 +73,8 @@ export default function Login() {
                 error: false,
             });
             console.log('desde try');
-            console.log('Backend URL:', `${import.meta.env.VITE_BACKEND_URL}/felman/usuarios`);
+            console.log('Backend URL:', `${import.meta.env.VITE_BACKEND_URL_LOCAL}`);
+            console.log('Backend URL:', `${import.meta.env.VITE_BACKEND_URL_PROD}`);
 
             const data = response.data;
             console.log(data);
@@ -113,8 +114,9 @@ export default function Login() {
                     error: true,
                 });
 
-                console.log('desde el error');
-                console.log('Backend URL:', `${import.meta.env.VITE_BACKEND_URL}/felman/usuarios`);
+                console.log('desde error');
+                console.log('Backend URL:', `${import.meta.env.VITE_BACKEND_URL_LOCAL}`);
+                console.log('Backend URL:', `${import.meta.env.VITE_BACKEND_URL_PROD}`);
     
             } else {
                 // Manejo de errores que vienen de la respuesta de la API
