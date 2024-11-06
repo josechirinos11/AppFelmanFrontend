@@ -1,12 +1,18 @@
 {
   "compilerOptions": {
-    "allowJs": true,
-    "jsx": "react-jsx", // o "react" si usas una versión anterior a React 17
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "target": "esnext",                          // Utiliza 'esnext' para aprovechar las últimas características de JS.
+    "module": "esnext",                          // Asegura que el módulo de salida sea compatible con los últimos estándares.
+    "moduleResolution": "node",                  // Especifica que la resolución de módulos se debe realizar como en Node.js.
+    "jsx": "react-jsx",                          // Usa "react-jsx" para proyectos con React 17 o superior.
+    "strict": true,                              // Habilita las comprobaciones estrictas de TypeScript (recomendado).
+    "esModuleInterop": true,                     // Permite la interoperabilidad con módulos CommonJS.
+    "skipLibCheck": true,                        // Ignora la comprobación de tipos en las bibliotecas.
+    "forceConsistentCasingInFileNames": true,    // Asegura que el uso de mayúsculas/minúsculas en los nombres de los archivos sea consistente.
+    "resolveJsonModule": true,                   // Permite importar archivos JSON directamente en tu código.
+    "allowJs": true,                             // Permite archivos `.js` junto con `.ts` y `.tsx`.
+    "noEmit": false,                             // Esto permite que TypeScript emita el código generado en el directorio de salida.
+    "isolatedModules": true                      // Garantiza que todos los archivos puedan ser tratados de forma independiente (para mejorar la compatibilidad con Vite).
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "include": ["src/**/*"],                       // Incluye todos los archivos de tu carpeta `src`.
+  "exclude": ["node_modules"]                    // Excluye `node_modules` para evitar que TypeScript los procese.
 }
