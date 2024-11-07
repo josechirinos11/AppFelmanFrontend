@@ -204,7 +204,7 @@ export default function CrearCuenta() {
                     <div className="flex justify-center">
                         <input
                             type="submit"
-                            value={cargando ? 'Creando...' : 'Crear Cuenta'} // Cambiar el texto del botón
+                            value={cargando ? 'Creando...' : 'Crear'} // Cambiar el texto del botón
                             className={`bg-red-500 w-1/2 py-3 px-10 rounded-xl text-white uppercase font-bold mt-5 hover:cursor-pointer hover:bg-red-600 ${cargando ? 'opacity-50 cursor-not-allowed' : ''}`} // Inhabilitar el botón
                         />
                     </div>
