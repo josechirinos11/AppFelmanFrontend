@@ -73,8 +73,8 @@ export default function Login() {
                 error: false,
             });
             console.log('desde try');
-            console.log('Backend URL:', `${import.meta.env.VITE_BACKEND_URL_LOCAL}`);
-            console.log('Backend URL:', `${import.meta.env.VITE_BACKEND_URL_PROD}`);
+            console.log('Backend URL:', `${import.meta.env.VITE_URL_EN_LOCAL}`);
+            console.log('Backend URL:', `${import.meta.env.VITE_URL_EN_PROD}`);
 
             const data = response.data;
             console.log(data);
@@ -115,8 +115,8 @@ export default function Login() {
                 });
 
                 console.log('desde error');
-                console.log('Backend URL:', `${import.meta.env.VITE_BACKEND_URL_LOCAL}`);
-                console.log('Backend URL:', `${import.meta.env.VITE_BACKEND_URL_PROD}`);
+                console.log('Backend URL:', `${import.meta.env.VITE_URL_EN_LOCAL}`);
+                console.log('Backend URL:', `${import.meta.env.VITE_URL_EN_PROD}`);
     
             } else {
                 // Manejo de errores que vienen de la respuesta de la API
