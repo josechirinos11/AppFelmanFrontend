@@ -198,7 +198,7 @@ export default function Login() {
 
                         
                             type="submit"
-                            value={cargando ? 'Cargando datos...' : 'Iniciar'} // Cambiar el texto del botón
+                            value={cargando ? 'Cargando...' : 'Iniciar'} // Cambiar el texto del botón
                             className={`bg-red-500 w-1/2 py-3 px-10 rounded-xl text-white uppercase font-bold mt-5 hover:cursor-pointer hover:bg-red-600 ${cargando ? 'opacity-50 cursor-not-allowed' : ''}`} // Inhabilitar el botón
                             disabled={cargando} // Agregar esta línea para inhabilitar el botón
                         />

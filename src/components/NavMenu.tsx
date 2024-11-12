@@ -40,6 +40,7 @@ const NavMenu = () => {
     
     switch (title) {
       case 'Recursos Humanos':
+        
         navigate('/recursos-humanos', { state: { informacion: item } });
         break;
       case 'Clientes y Ventas':
@@ -72,6 +73,7 @@ const NavMenu = () => {
       default:
         console.log('No hay ruta definida para este ítem.');
     }
+    setIsOptionsMenuOpen(false);
   };
 
   
