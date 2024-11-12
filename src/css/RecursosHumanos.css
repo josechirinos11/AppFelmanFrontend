@@ -1,0 +1,70 @@
+/* Estilo general para el contenedor principal */
+.recursos-container {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+  }
+  
+  /* Estilo para el título */
+  .recursos-title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  /* Estilos para el botón de "Agregar Trabajador" */
+  .recursos-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: rgb(239 68 68);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    display: block;
+    width: 100%;
+  }
+  
+  .recursos-button:hover {
+    background-color: #C0392B;
+  }
+  
+  /* Estilo para el input de búsqueda */
+  .recursos-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+  }
+  
+  /* Estilo para la lista */
+  .recursos-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .recursos-list-item {
+    font-size: 18px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .recursos-list-item:last-child {
+    border-bottom: none;
+  }
+  
+  .no-results {
+    color: #666;
+    font-size: 16px;
+    text-align: center;
+    padding: 10px;
+  }
+  
