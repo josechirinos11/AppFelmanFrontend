@@ -65,19 +65,17 @@ export default function Login() {
         // Si no hay errores, limpiar alerta
         setAlerta({});
 
-        // Crear el usuario en la API
+        // 
         try {
             const response = await clienteAxios.post('/usuarios/login', { email, password });
             setAlerta({
                 msg: 'Cargando datos...............',
                 error: false,
             });
-            console.log('desde try');
-            console.log('Backend URL:', `${import.meta.env.VITE_URL_EN_LOCAL}`);
-            console.log('Backend URL:', `${import.meta.env.VITE_URL_EN_PROD}`);
+           
 
             const data = response.data;
-            console.log(data);
+            
             const { token, nombre: nombreUSER, email: emailUSER } = data;
             //  const expirationInMinutes = 60; // Por ejemplo, 1 hora
             //   const expirationDate = new Date(Date.now() + expirationInMinutes * 60000);
