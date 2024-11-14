@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Alerta from '../components/Alerta';
 import clienteAxios from '../config/axios';
@@ -13,7 +13,6 @@ export default function Login() {
 
 
 
-
     const [errorInput, setErrorInput] = useState({
 
         email: false,
@@ -24,6 +23,16 @@ export default function Login() {
     const [alerta, setAlerta] = useState({});
     const [cargando, setCargando] = useState(false); // Nuevo estado para controlar la carga
     const navigate = useNavigate(); // Inicializar useNavigate
+
+
+    useEffect(() => {
+        // Si hay un token en localStorage, redirige al home
+        if (localStorage.getItem('token')) {
+        console.log('recargando login')
+          navigate('/');
+        }
+      }, []); // Solo se ejecuta al montar el componente
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();

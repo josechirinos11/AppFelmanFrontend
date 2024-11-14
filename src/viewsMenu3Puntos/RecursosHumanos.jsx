@@ -12,10 +12,11 @@ export default function RecursosHumanos() {
 
   // useEffect para consultar la base de datos al cargar el componente o cambiar "informacion"
   useEffect(() => {
+    
     const fetchData = async () => {
       if (informacion === "Empleados") {
         try {
-          const response = await clienteAxios.get('/usuarios/recursos-humanos'); // Ruta para traer la colección trabajadores
+          const response = await clienteAxios.get('/trabajadores/recursos-humanos'); // Ruta para traer la colección trabajadores
           setData(response.data);            // Guardamos los datos en el estado
           setFilteredData(response.data);    // Inicializamos el filtro con todos los datos
         } catch (error) {
