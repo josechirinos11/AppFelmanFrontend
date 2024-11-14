@@ -17,10 +17,12 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('tokenExpiration', expirationDate);
         localStorage.setItem('usuario', JSON.stringify(userData)); // Guardar usuario en localStorage
         setToken(token);
-        const {nombreUSER, emailUSER} = userData
+        
+        const {nombreUSER, emailUSER, idUSER} = userData
         console.log(nombreUSER);
         console.log(emailUSER);
-        setUsuario({nombreUSER, emailUSER}); // Guarda la información del usuario
+        console.log(idUSER);
+        setUsuario({nombreUSER, emailUSER, idUSER }); // Guarda la información del usuario
         console.log("Usuario context:  ", usuario); // Agrega este log
         navigate('/mi-cuenta'); // Redirige a la página deseada
     };

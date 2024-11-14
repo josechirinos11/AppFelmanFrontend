@@ -85,12 +85,12 @@ export default function Login() {
 
             const data = response.data;
             
-            const { token, nombre: nombreUSER, email: emailUSER } = data;
+            const { token, nombre: nombreUSER, email: emailUSER, _id: idUSER } = data;
             //  const expirationInMinutes = 60; // Por ejemplo, 1 hora
             //   const expirationDate = new Date(Date.now() + expirationInMinutes * 60000);
 
 
-            login(token, 60, { nombreUSER, emailUSER })
+            login(token, 60, { nombreUSER, emailUSER, idUSER })
             //  localStorage.setItem('token', data.token);
             //  localStorage.setItem('tokenExpiration', expirationDate);
             console.log(nombreUSER)
