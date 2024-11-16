@@ -36,7 +36,7 @@ const NavMenu = () => {
 
   // Manejar la navegación a diferentes rutas según el ítem
   const handleItemBoton = (title: string, item: string) => {
-    console.log('Presionando botón:', title, '-', item);
+    console.log('REDIRIGUIENDO COMPONENTE:', title, '-', item);
     
     switch (title) {
       case 'Recursos Humanos':

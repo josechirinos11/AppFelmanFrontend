@@ -1,0 +1,97 @@
+/* Estilo del modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 400px;
+    max-width: 100%;
+  }
+  
+  .modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .modal-buttons button {
+    background: rgb(239, 68, 68);
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .modal-buttons button:hover {
+    background: #C0392B;
+  }
+  
+  /* Estilo general del formulario */
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Espaciado entre cada campo */
+}
+
+/* Agrupación de los campos */
+.modal-content form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+/* Estilo de los inputs */
+.modal-content form input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 5px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Resaltar labels al pasar sobre el campo */
+.modal-content form input:focus + label {
+  color: #3498db;
+}
+
+/* Botones */
+.modal-buttons button {
+  background: rgb(239, 68, 68);;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modal-buttons button:hover {
+  background: #e74c3c;
+}
+
+/* Botón de cancelar */
+.modal-buttons button[type="button"] {
+  background: #e74c3c;
+}
+
+.modal-buttons button[type="button"]:hover {
+  background: #c0392b;
+}

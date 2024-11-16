@@ -3,14 +3,17 @@ import clienteAxios from "../config/axios"; // Importa la configuración de axio
 import "../css/RecursosHumanos.css"; // Asegúrate de que los estilos sean los adecuados
 import { useAuth } from '../config/AuthContext';
 
+
 const AgregarUsuarioTrabajador = ({ onClose, onAdd }) => {
+   
     const { usuario } = useAuth(); // Extraer la función login del contexto
-    console.log('desde modal:  .....    ',usuario)
+    const usuarioContexto = usuario || JSON.parse(localStorage.getItem('usuario'));
+   
   const [newTrabajador, setNewTrabajador] = useState({
     "nombre" : "trabajador No 8",
     "email" : "No8@correo.com",
     "password" : "123456",
-    "usuarioId": usuario.idUSER
+    "usuarioId": usuarioContexto.idUSER
   });
  
 
@@ -22,7 +25,7 @@ const AgregarUsuarioTrabajador = ({ onClose, onAdd }) => {
       [name]: value,
     }));
   };
-
+  
   // Función para agregar trabajador al servidor
   const handleAgregar = async () => {
     try {

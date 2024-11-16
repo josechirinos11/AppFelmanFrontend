@@ -89,18 +89,13 @@ export default function Login() {
             //  const expirationInMinutes = 60; // Por ejemplo, 1 hora
             //   const expirationDate = new Date(Date.now() + expirationInMinutes * 60000);
 
-
+            console.log("SE ENVIA INFORMACION DE LOGIN AL CONTEX");
             login(token, 60, { nombreUSER, emailUSER, idUSER })
-            //  localStorage.setItem('token', data.token);
-            //  localStorage.setItem('tokenExpiration', expirationDate);
-            console.log(nombreUSER)
-            console.log(emailUSER)
-            console.log("Token guardado en localStorage:", localStorage.getItem('token'));
-            console.log("fecha:", localStorage.getItem('tokenExpiration'));
+           
 
             if (data.token) {
 
-                console.log('dentro del if')
+                console.log('REDIRIGIR A MI-CUENTA')
 
                 navigate('/mi-cuenta'); // Redirigir a una ruta privada
             } else {

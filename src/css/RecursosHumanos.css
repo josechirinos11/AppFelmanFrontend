@@ -131,3 +131,49 @@
 .modal-button:focus {
   outline: none;
 }
+.recursos-list {
+  list-style: none;
+  padding: 0;
+}
+
+.recursos-list-item {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recursos-list-item button {
+  background: rgb(239 68 68);
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.recursos-list-item button:hover {
+  background: #C0392B;
+}
+.recursos-list-item button {
+  background: rgb(239 68 68);
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px; /* Añade un margen derecho */
+}
+
+.recursos-list-item button:last-child {
+  margin-right: 0; /* Quita el margen del último botón */
+}
+
+.recursos-list-item button:hover {
+  background: #C0392B;
+}
+
