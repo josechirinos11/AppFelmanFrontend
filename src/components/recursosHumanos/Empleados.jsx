@@ -135,7 +135,12 @@ export default function Empleado() {
           filteredData.map((trabajador) => (
             <li key={trabajador._id} className="recursos-list-item">
               <strong>{trabajador.nombre}</strong>
-              <strong>{trabajador.email}</strong>
+              <strong
+          className={trabajador.confirmado ? "email-confirmado" : "email-no-confirmado"}
+          title={trabajador.confirmado ? "Confirmado" : "No confirmado"}
+        >
+          {trabajador.email}
+        </strong>
               <div>
                 <button onClick={() => handleEdit(trabajador._id)}>Editar</button>
                 <button onClick={() => openConfirmDialog(trabajador._id)}>Eliminar</button>

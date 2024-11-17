@@ -228,4 +228,11 @@
     margin-top: 10px; /* Añadir separación entre la información y los botones */
   }
 }
+.email-confirmado {
+  color: green;
+}
+
+.email-no-confirmado {
+  color: red;
+}
 
