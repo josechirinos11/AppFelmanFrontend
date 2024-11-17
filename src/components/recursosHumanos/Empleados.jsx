@@ -18,21 +18,29 @@ export default function Empleado() {
   const [showDialog, setShowDialog] = useState(false);  // Estado para mostrar el cuadro de confirmación
   const [selectedID, setSelectedID] = useState(null);  // ID del trabajador seleccionado para eliminar
 
-  // Fetch para traer los datos de empleados
   useEffect(() => {
     const fetchData = async () => {
       if (informacion === "Empleados") {
         try {
+          // Fetch de los datos de empleados
           const response = await clienteAxios.get('/trabajadores/recursos-humanos');
-          setData(response.data);  // Guardamos los datos en el estado
-          setFilteredData(response.data);  // Inicializamos el filtro con todos los datos
+          setData(response.data);  // Guardar datos de empleados
+          setFilteredData(response.data);
+  
+          // Fetch de los campos del modelo
+          const responseCampos = await clienteAxios.get('/trabajadores/campos');
+         
+          // Si necesitas guardar los campos en un estado diferente
+          // puedes usar otro estado como `setCampos`.
         } catch (error) {
-          console.error("Error al obtener los datos de empleados:", error);
+          console.error("Error al obtener los datos de empleados o campos:", error);
         }
       }
     };
+  
     fetchData();
   }, [informacion]);
+  
 
   // Función para filtrar los trabajadores por el término de búsqueda
   const handleSearch = (e) => {
@@ -76,7 +84,8 @@ export default function Empleado() {
   const handleDelete = async (IDtrabajador) => {
     try {
       const response = await clienteAxios.delete(`/trabajadores/recursos-humanos/${IDtrabajador}`);
-      console.log("Trabajador eliminado:", response.data);
+ 
+      alert(response.data.mensaje);
 
       // Recargar la lista de trabajadores
       const updatedResponse = await clienteAxios.get("/trabajadores/recursos-humanos");
@@ -126,6 +135,7 @@ export default function Empleado() {
           filteredData.map((trabajador) => (
             <li key={trabajador._id} className="recursos-list-item">
               <strong>{trabajador.nombre}</strong>
+              <strong>{trabajador.email}</strong>
               <div>
                 <button onClick={() => handleEdit(trabajador._id)}>Editar</button>
                 <button onClick={() => openConfirmDialog(trabajador._id)}>Eliminar</button>

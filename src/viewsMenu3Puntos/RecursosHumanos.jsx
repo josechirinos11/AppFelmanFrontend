@@ -17,14 +17,8 @@ export default function RecursosHumanos() {
   const location = useLocation();
   const { informacion } = location.state || {}; // Obtén la información pasada al componente
   const [mensaje, setMensaje] = useState("");  // Estado para manejar el mensaje
-
-
   const [data, setData] = useState([]);          // Estado para almacenar los datos de la colección
   const [filteredData, setFilteredData] = useState([]); // Estado para el resultado de la búsqueda
-  const [searchTerm, setSearchTerm] = useState("");     // Estado para el término de búsqueda
-  const [selectedID, setSelectedID] = useState(null); // Almacena el ID del trabajador a eliminar
-
-
   const { usuario } = useAuth(); // Extraer la función login del contexto
   const usuarioContexto = usuario || JSON.parse(localStorage.getItem('usuario'));
 
@@ -61,7 +55,7 @@ export default function RecursosHumanos() {
   
         if (response && response.data) {
           setMensaje(response.data.mensaje)
-          console.log(response.data)
+         
           setData(response.data);          // Guardamos los datos en el estado
           setFilteredData(response.data);  // Inicializamos el filtro con todos los datos
         }
@@ -76,104 +70,14 @@ export default function RecursosHumanos() {
   }, [informacion]);
   
 
-  // Manejador para el input de búsqueda
-  const handleSearch = (e) => {
-    const term = e.target.value.toLowerCase();
-    setSearchTerm(term);
-    // Filtrar los trabajadores según el término de búsqueda
-    const filtered = data.filter((trabajador) =>
-      trabajador.nombre.toLowerCase().includes(term)
-    );
-    setFilteredData(filtered);
-  };
-
-  // Función para abrir y cerrar el modal
-  const handleModalToggle = () => {
-    setShowModal(!showModal);
-  };
-
-  // Función para actualizar la lista de trabajadores después de agregar uno
-  const handleAdd = () => {
-    // Recargar los datos después de agregar un trabajador
-    const fetchData = async () => {
-      const response = await clienteAxios.get(
-        "/trabajadores/recursos-humanos"
-      );
-      setData(response.data);
-      setFilteredData(response.data);
-    };
-    fetchData();
-  };
-
-  const handleEdit = (IDtrabajador) => {
-    console.log(IDtrabajador)
-    const trabajador = data.find((trabajador) => trabajador._id === IDtrabajador);
-    setSelectedTrabajador(trabajador);
-    setShowEditModal(true);  // Abre el modal de edición
-
-  };
-  const handleCloseEditModal = () => {
-    setShowEditModal(false);  // Cierra el modal de edición
-    setSelectedTrabajador(null);  // Limpia el trabajador seleccionado
-  };
-
-
-  const handleDelete = async (IDtrabajador) => {
-    try {
-      // Eliminar el trabajador
-      const response = await clienteAxios.delete(
-        `/trabajadores/recursos-humanos/${IDtrabajador}`
-      );
-      console.log("Trabajador eliminado:", response.data);
-
-      // Obtener la lista actualizada de trabajadores
-      const updatedResponse = await clienteAxios.get("/trabajadores/recursos-humanos");
-      setData(updatedResponse.data);         // Actualizamos el estado con los nuevos datos
-      setFilteredData(updatedResponse.data); // Actualizamos también el filtro
-    } catch (error) {
-      console.error("Error al eliminar el trabajador:", error);
-      alert("Ocurrió un error al intentar eliminar el trabajador.");
-    }
-  };
-
-  const openConfirmDialog = (id) => {
-    setSelectedID(id);
-    setShowDialog(true);
-  };
-
-  const closeConfirmDialog = () => {
-    setShowDialog(false);
-    setSelectedID(null);
-  };
-
-  const confirmDelete = () => {
-    if (selectedID) {
-      handleDelete(selectedID);
-      closeConfirmDialog();
-    }
-  };
+ 
 
   const renderComponent = () => {
     switch (informacion) {
       case "Empleados":
         return (
           <Empleado 
-            searchTerm={searchTerm} 
-            handleSearch={handleSearch} 
-            filteredData={filteredData} 
-            mensaje={mensaje} 
-            handleModalToggle={handleModalToggle} 
-            showModal={showModal} 
-            onAdd={handleAdd} 
-            showDialog={showDialog} 
-            openConfirmDialog={openConfirmDialog} 
-            closeConfirmDialog={closeConfirmDialog} 
-            handleEdit={handleEdit} 
-            handleDelete={handleDelete} 
-            handleCloseEditModal={handleCloseEditModal} 
-            selectedTrabajador={selectedTrabajador} 
-            showEditModal={showEditModal} 
-            confirmDelete={confirmDelete} 
+           
           />
         );
       case "Departamentos":

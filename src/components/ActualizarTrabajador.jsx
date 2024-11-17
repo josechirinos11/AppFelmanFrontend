@@ -1,49 +1,46 @@
-// src/components/ActualizarTrabajador.jsx
 import React, { useState, useEffect } from "react";
 import clienteAxios from "../config/axios";
-import "../css/ActualizarTrabajador.css"
-import "../css/RecursosHumanos.css"; // Asegúrate de que los estilos sean los adecuados
+import "../css/ActualizarTrabajador.css";
+import "../css/RecursosHumanos.css";
 
 const ActualizarTrabajador = ({ trabajadorId, onClose, onUpdate }) => {
-  const [trabajador, setTrabajador] = useState({
-    nombre: "",
-    email: "",
-    password: "",
-    identificacion: "",
-    puesto: "",
-    salario: "",
-    telefono: "",
-  });
+  const [campos, setCampos] = useState([]); // Campos del modelo
+  const [trabajador, setTrabajador] = useState({}); // Datos del trabajador
   const [loading, setLoading] = useState(true); // Estado para manejar la carga de datos
 
-  // Obtener los datos del trabajador para editar
+  // Obtener los campos del modelo
   useEffect(() => {
+    const fetchCampos = async () => {
+      try {
+        const response = await clienteAxios.get("/trabajadores/campos");
+        setCampos(response.data); // Guardar los campos en el estado
+      } catch (error) {
+        console.error("Error al obtener los campos del modelo:", error);
+      }
+    };
+
     const fetchTrabajador = async () => {
       try {
-        const response = await clienteAxios.get(`/trabajadores/recursos-humanos/${trabajadorId}`);
+        const response = await clienteAxios.get(
+          `/trabajadores/recursos-humanos/${trabajadorId}`
+        );
         const data = response.data;
+
+        // Eliminar el campo `password` del objeto antes de establecer el estado
+        const { password, ...restoDeCampos } = data;
   
-        // Asegurar que todos los campos tengan valores válidos
-        setTrabajador({
-          nombre: data.nombre || "",
-          email: data.email || "",
-          password: "", // No cargar la contraseña
-          identificacion: data.identificacion || "",
-          puesto: data.puesto || "",
-          salario: data.salario ? String(data.salario) : "", // Convertir salario a string
-          telefono: data.telefono || "",
-        });
-        setLoading(false);
+        setTrabajador(restoDeCampos); // Establecer solo los campos requeridos
       } catch (error) {
         console.error("Error al obtener trabajador:", error);
       }
     };
-  
+
     if (trabajadorId) {
+      fetchCampos();
       fetchTrabajador();
+      setLoading(false);
     }
   }, [trabajadorId]);
-  
 
   // Manejo del formulario de actualización
   const handleChange = (e) => {
@@ -61,7 +58,7 @@ const ActualizarTrabajador = ({ trabajadorId, onClose, onUpdate }) => {
       );
       console.log("Trabajador actualizado:", response.data);
       onUpdate(); // Llamar a la función para actualizar la lista
-      onClose();  // Cerrar el modal
+      onClose(); // Cerrar el modal
     } catch (error) {
       console.error("Error al actualizar trabajador:", error);
       alert("Ocurrió un error al intentar actualizar el trabajador.");
@@ -77,78 +74,18 @@ const ActualizarTrabajador = ({ trabajadorId, onClose, onUpdate }) => {
       <div className="modal-content">
         <h2>Actualizar Trabajador</h2>
         <form onSubmit={handleUpdate}>
-          <label htmlFor="nombre">
-            Nombre:
-            <input
-              type="text"
-              id="nombre"
-              name="nombre"
-              value={trabajador.nombre}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="email">
-            Email:
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={trabajador.email}
-              onChange={handleChange}
-              autoComplete="username"
-            />
-          </label>
-          <label htmlFor="password">
-            Contraseña:
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={trabajador.password}
-              onChange={handleChange}
-              autoComplete="new-password" // O "current-password", según el caso
-            />
-          </label>
-          <label htmlFor="identificacion">
-            Identificación:
-            <input
-              type="text"
-              id="identificacion"
-              name="identificacion"
-              value={trabajador.identificacion}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="puesto">
-            Puesto:
-            <input
-              type="text"
-              id="puesto"
-              name="puesto"
-              value={trabajador.puesto}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="salario">
-            Salario:
-            <input
-              type="number"
-              id="salario"
-              name="salario"
-              value={trabajador.salario}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="telefono">
-            Teléfono:
-            <input
-              type="text"
-              id="telefono"
-              name="telefono"
-              value={trabajador.telefono}
-              onChange={handleChange}
-            />
-          </label>
+          {campos.map((campo) => (
+            <label htmlFor={campo} key={campo}>
+              {campo.charAt(0).toUpperCase() + campo.slice(1)}:
+              <input
+                type="text"
+                id={campo}
+                name={campo}
+                value={trabajador[campo] || ""}
+                onChange={handleChange}
+              />
+            </label>
+          ))}
           <div className="modal-buttons">
             <button type="submit">Actualizar</button>
             <button type="button" onClick={onClose}>
@@ -156,7 +93,6 @@ const ActualizarTrabajador = ({ trabajadorId, onClose, onUpdate }) => {
             </button>
           </div>
         </form>
-
       </div>
     </div>
   );

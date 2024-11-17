@@ -13,7 +13,7 @@ export default function MiCuenta() {
 const UserLocalstorage = localStorage.getItem('usuario')
 // Convertir la cadena JSON de nuevo a un objeto
 const usuarioObjeto = UserLocalstorage ? JSON.parse(UserLocalstorage) : null;
-console.log(usuarioObjeto)
+
  
   return (
     <div>

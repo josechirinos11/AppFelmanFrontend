@@ -33,7 +33,13 @@ const AgregarUsuarioTrabajador = ({ onClose, onAdd }) => {
         "/trabajadores/recursos-humanos",
         newTrabajador
       );
-      console.log("Trabajador agregado:", response.data);
+      
+      if (!response.data.email) {
+        alert("Ya tienes agregado un trabajador con ese correo.");
+      } 
+      
+      
+
       onAdd(); // Llama a onAdd para actualizar la lista de trabajadores
       onClose(); // Cierra el modal después de agregar el trabajador
     } catch (error) {

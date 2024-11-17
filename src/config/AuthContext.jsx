@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
 
     // Guardar el token y la fecha de expiración al iniciar sesión
     const login = (token, expirationInMinutes, userData) => {
-        console.log("contex Login", token, expirationInMinutes, userData); // Agrega este log
+       
         const expirationDate = new Date(Date.now() + expirationInMinutes * 60000);
         localStorage.setItem('token', token);
         localStorage.setItem('tokenExpiration', expirationDate);
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
         if (usuario) {
             localStorage.setItem('usuario', JSON.stringify(usuario));
         }
-        console.log("Desde el contex useEffect USUARIO: ", usuario);
+        
     }, [usuario]); // Solo se ejecuta cuando 'usuario' cambia
 
 

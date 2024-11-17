@@ -177,3 +177,55 @@
   background: #C0392B;
 }
 
+
+/* Estilos para dispositivos pequeños (móviles) */
+@media (max-width: 768px) {
+  .recursos-list-item {
+    display: flex;
+    flex-direction: column; /* Hacer que los elementos de la lista se alineen en columna */
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+  }
+
+  .recursos-list-item strong {
+    margin-bottom: 5px; /* Añadir margen entre nombre y correo */
+  }
+
+  .recursos-list-item div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .recursos-list-item button {
+    background: rgb(239 68 68);
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-top: 10px; /* Añadir un margen superior a los botones en dispositivos pequeños */
+  }
+
+  .recursos-list-item button:last-child {
+    margin-right: 0;
+  }
+
+  .recursos-list-item div button {
+    margin-top: 5px; /* Separa los botones verticalmente */
+  }
+
+  .recursos-list-item button:hover {
+    background: #C0392B;
+  }
+
+  /* Alineación de botones en dispositivos pequeños */
+  .recursos-list-item div {
+    flex-direction: row;
+    gap: 10px; /* Separación entre los botones */
+    margin-top: 10px; /* Añadir separación entre la información y los botones */
+  }
+}
+
