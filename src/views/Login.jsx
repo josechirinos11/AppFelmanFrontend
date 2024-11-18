@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Alerta from '../components/Alerta';
 import clienteAxios from '../config/axios';
-import felmanImage from '../img/felman.png';
+import felmanImage from '../img/YouApp.png';
 import { useAuth } from '../config/AuthContext';
 
 export default function Login() {

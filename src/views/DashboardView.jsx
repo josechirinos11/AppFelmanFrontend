@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../config/AuthContext';
 
-import felmanImage from '../img/felman.png';
+import felmanImage from '../img/logoReact.png';
 
 export default function DashboardView() {
     const { token } = useContext(AuthContext);

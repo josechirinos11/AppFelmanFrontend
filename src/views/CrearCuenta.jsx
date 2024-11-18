@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Link, useNavigate  } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Alerta from '../components/Alerta';
 import clienteAxios from '../config/axios';
-import felmanImage from '../img/felman.png';
+import felmanImage from '../img/YouApp.png';
+import './Views.css';
 
 export default function CrearCuenta() {
     const [nombre, setNombre] = useState('jose');
@@ -26,8 +27,8 @@ export default function CrearCuenta() {
         console.log('click boton')
 
 
-                // Activar estado de carga
-                setCargando(true);
+        // Activar estado de carga
+        setCargando(true);
 
 
         // Resetear los errores
@@ -119,28 +120,34 @@ export default function CrearCuenta() {
 
     return (
         <>
-            <div>
+ <div>
                 <img
                     src={felmanImage}
                     alt="Descripción de la imagen"
                     className="object-cover"
                 />
-                                
+
             </div>
+
+
+
+
+
+
 
             <div
                 className="mt-20 md:mt-5 shadow-lg px-5 py-10 rounded-xl bg-white relative"
                 style={{ boxShadow: '0 4px 20px rgba(255, 0, 0, 0.5)' }} // Sombra roja
             >
                 <form onSubmit={handleSubmit} className="mb-5">
-                <label
+                    <label
                         className="block text-4xl font-semibold italic"
                         style={{
                             color: '#e20613',           // Color rojo similar al logo
                             fontFamily: 'sans-serif',   // Fuente sans-serif
-                             // Minúsculas para coincidir con el logo
+                            // Minúsculas para coincidir con el logo
                             bottom: '10px',             // Posicionado hacia la parte inferior
-                            right: '10px' ,              // Posicionado hacia la derecha
+                            right: '10px',              // Posicionado hacia la derecha
                             textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)' // Sombra suave
                         }}
                     >

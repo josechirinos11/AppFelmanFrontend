@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate  } from 'react-router-dom';
 import Alerta from '../components/Alerta';
 import clienteAxios from '../config/axios';
-import felmanImage from '../img/felman.png';
+import felmanImage from '../img/YouApp.png';
 
 export default function OlvidePassword() {
 
