@@ -6,7 +6,7 @@ import felmanImage from '../img/YouApp.png';
 import { useAuth } from '../config/AuthContext';
 
 export default function Login() {
-    const { login } = useAuth(); // Extraer la función login del contexto
+    const { login, setDepartamentoUSER } = useAuth(); // Extraer la función login del contexto
 
     const [email, setEmail] = useState('jose@jose.com');
     const [password, setPassword] = useState('123456');
@@ -85,13 +85,16 @@ export default function Login() {
 
             const data = response.data;
             
-            const { token, nombre: nombreUSER, email: emailUSER, _id: idUSER } = data;
+            const { token, nombre: nombreUSER, email: emailUSER, _id: idUSER, rol: rolUSER } = data;
             //  const expirationInMinutes = 60; // Por ejemplo, 1 hora
             //   const expirationDate = new Date(Date.now() + expirationInMinutes * 60000);
 
+            console.log(data);
+            
             console.log("SE ENVIA INFORMACION DE LOGIN AL CONTEX");
-            login(token, 60, { nombreUSER, emailUSER, idUSER })
-           
+            login(token, 60, { nombreUSER, emailUSER, idUSER, rolUSER })
+            setDepartamentoUSER(data.departamentos)
+            localStorage.setItem('departamentos', JSON.stringify(data.departamentos)); // Guarda en localStorage
 
             if (data.token) {
 

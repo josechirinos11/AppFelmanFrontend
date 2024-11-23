@@ -1,18 +1,43 @@
 // NavMenu.jsx
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate, useLocation  } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { FaSearch, FaEllipsisV, FaChevronDown, FaChevronRight, FaBars } from 'react-icons/fa';
 import { CgMenuRound } from "react-icons/cg";
-import '../css/NavMenu.css'; 
+import '../css/NavMenu.css';
 import felmanImage from '../img/felman.png';
 import usuarioIMG from '../img/usuario.png';
 import { useAuth } from '../config/AuthContext';
 import menuItems from '../config/menuItems';
 
 
+// Tipos para TypeScript
+interface Item {
+  name: string;
+  active: boolean;
+}
+
+interface Departamento {
+  title: string;
+  items: Item[];
+}
+
+interface MenuItem {
+  title: string;
+  items: string[];
+}
+
+
 const NavMenu = () => {
   const navigate = useNavigate(); // Inicializar useNavigate solo una vez
-  const { logout } = useAuth();
+  const { logout, departamentosUSER } = useAuth();
+  const storedDepartamentos = localStorage.getItem('departamentos');
+  const departamentos = storedDepartamentos ? JSON.parse(storedDepartamentos) : [];
+  const [filteredMenuItems, setFilteredMenuItems] = useState([]);
+ // Estado para almacenar los departamentos actualizados
+ const [menuItemsActualizada, setMenuItemsActualizada] = useState<{ title: string; items: string[] }[]>([]);
+
+  
+
   const UserLocalstorage = localStorage.getItem('usuario');
   // convertir a objeto lo que esta la cadena de texto
   const usuarioObjeto = UserLocalstorage ? JSON.parse(UserLocalstorage) : null;
@@ -26,7 +51,7 @@ const NavMenu = () => {
 
   const toggleProfileMenu = () => setIsProfileMenuOpen(!isProfileMenuOpen);
   const toggleOptionsMenu = () => setIsOptionsMenuOpen(!isOptionsMenuOpen);
-  
+
   const toggleDropdown = (index: number) => {
     setOpenDropdowns((prev) => ({
       ...prev,
@@ -34,13 +59,33 @@ const NavMenu = () => {
     }));
   };
 
+
+// useEffect para actualizar menuItemsActualizada cuando 'departamentos' cambie
+useEffect(() => {
+  const nuevaMenuItems = departamentos.map(departamento => ({
+    title: departamento.title,
+    items: departamento.items
+      .filter(item => item.active)  // Filtra los items activos
+      .map(item => item.name)       // Solo toma el nombre del item
+  }));
+  
+  setMenuItemsActualizada(nuevaMenuItems);
+  console.log("Nuevo: ", nuevaMenuItems);  // Muestra el resultado en consola
+  console.log("viejo: ", departamentosUSER)
+  console.log("menu: ", menuItems)
+}, []);  // Dependencia vacía, solo se ejecuta una vez al montar
+
+
+
+
+
   // Manejar la navegación a diferentes rutas según el ítem
   const handleItemBoton = (title: string, item: string) => {
     console.log('REDIRIGUIENDO COMPONENTE:', title, '-', item);
-    
+
     switch (title) {
       case 'Recursos Humanos':
-        
+
         navigate('/recursos-humanos', { state: { informacion: item } });
         break;
       case 'Clientes y Ventas':
@@ -76,43 +121,54 @@ const NavMenu = () => {
     setIsOptionsMenuOpen(false);
   };
 
-  
+
   const HandleSetting = () => {
-    
+
     navigate('/ajustes');
-   
+
   };
 
   const HandleCerrarSesion = () => {
     console.log('Cerrando sesión');
     logout();
   };
-    // Efecto para cerrar el menú al hacer clic fuera de él
-    useEffect(() => {
-      const handleClickOutside = (event: MouseEvent) => {
-        // Si el menú de opciones está abierto y el clic se hace fuera de él, ciérralo
-        if (isOptionsMenuOpen && optionsMenuRef.current && !optionsMenuRef.current.contains(event.target as Node)) {
-          setIsOptionsMenuOpen(false);
-          setOpenDropdowns({}); // Cerrar todos los dropdowns
-        }
 
 
-         // Si el menú de perfil está abierto y el clic se hace fuera de él, ciérralo
-    if (isProfileMenuOpen && logoRef.current && !logoRef.current.contains(event.target as Node)) {
-      setIsProfileMenuOpen(false);
-    }
 
 
-      };
-  
-      // Agrega el listener
-      document.addEventListener('mousedown', handleClickOutside);
-      
-      // Limpieza del listener al desmontar el componente
-      return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
-      };
-    }, [isOptionsMenuOpen, isProfileMenuOpen]);
+
+
+
+
+
+  // Efecto para cerrar el menú al hacer clic fuera de él
+  useEffect(() => {
+
+
+    const handleClickOutside = (event: MouseEvent) => {
+      // Si el menú de opciones está abierto y el clic se hace fuera de él, ciérralo
+      if (isOptionsMenuOpen && optionsMenuRef.current && !optionsMenuRef.current.contains(event.target as Node)) {
+        setIsOptionsMenuOpen(false);
+        setOpenDropdowns({}); // Cerrar todos los dropdowns
+      }
+
+
+      // Si el menú de perfil está abierto y el clic se hace fuera de él, ciérralo
+      if (isProfileMenuOpen && logoRef.current && !logoRef.current.contains(event.target as Node)) {
+        setIsProfileMenuOpen(false);
+      }
+
+
+    };
+
+    // Agrega el listener
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // Limpieza del listener al desmontar el componente
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOptionsMenuOpen, isProfileMenuOpen]);
 
   return (
     <nav className="nav-menu">
@@ -124,8 +180,8 @@ const NavMenu = () => {
             <p>Cargo del Usuario</p>
             <p>{usuarioObjeto?.nombreUSER}</p>
             <p>{usuarioObjeto?.emailUSER}</p>
-            <button  className="felman-button" onClick={HandleSetting}>Ajustes</button>
-            <button  className="felman-button" onClick={HandleCerrarSesion}>Cerrar Sesión</button>
+            <button className="felman-button" onClick={HandleSetting}>Ajustes</button>
+            <button className="felman-button" onClick={HandleCerrarSesion}>Cerrar Sesión</button>
           </div>
         )}
       </div>
@@ -135,14 +191,19 @@ const NavMenu = () => {
         <FaSearch className="search-icon custom-icon" />
       </div>
 
-     {/* Botón de opciones con menú desplegable */}
-     <div className="options-menu" ref={optionsMenuRef}> {/* Asignar la referencia aquí */}
+      {/* Botón de opciones con menú desplegable */}
+      <div className="options-menu" ref={optionsMenuRef}> {/* Asignar la referencia aquí */}
         <FaBars onClick={toggleOptionsMenu} className="options-icon custom-icon" />
         {isOptionsMenuOpen && (
           <div className="dropdown-menu">
-            {menuItems.map((menuItem, index) => (
+          {menuItemsActualizada
+            .filter((menuItem) => menuItem.items.length > 0) // Filtra solo los que tienen items
+            .map((menuItem, index) => (
               <div key={index} className="dropdown-item">
-                <button onClick={() => toggleDropdown(index)} className="dropdown-toggle">
+                <button
+                  onClick={() => toggleDropdown(index)}
+                  className="dropdown-toggle"
+                >
                   {menuItem.title} {openDropdowns[index] ? <FaChevronDown /> : <FaChevronRight />}
                 </button>
                 {openDropdowns[index] && (
@@ -160,7 +221,8 @@ const NavMenu = () => {
                 )}
               </div>
             ))}
-          </div>
+        </div>
+        
         )}
       </div>
     </nav>

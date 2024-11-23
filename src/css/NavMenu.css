@@ -1,10 +1,52 @@
 /* NavMenu.css */
+
+
+
+:root {
+  /* Variables globales */
+  --color-primary: rgb(239, 68, 68);
+  --color-primary-hover: #C0392B;
+  --font-main: 'Arial', sans-serif;
+
+  /* Tema claro */
+  --bg-color-claro: rgb(243, 244, 246);
+  --bg-2doPiso-claro: rgb(229, 231, 235);
+  --bg-3erPiso-claro: rgb(209, 213, 219);
+  --bg-4toPiso-claro: rgb(156, 163, 175);
+  --color-text-claro: #333;
+
+  /* Tema oscuro */
+  --bg-color-oscuro: rgb(15, 23, 42);
+  --bg-2doPiso-oscuro: rgb(30, 41, 59);
+  --bg-3erPiso-oscuro: rgb(51, 65, 85);
+  --bg-4toPiso-oscuro: rgb(71, 85, 105);
+  --color-text-oscurio: rgb(209, 213, 219);
+
+  /* Tema moderno */
+  --bg-color-moderno: rgb(45, 86, 98);
+  --bg-2doPiso-moderno: rgb(38, 77, 86);
+  --bg-3erPiso-moderno: rgb(121, 255, 255);
+  --bg-4toPiso-moderno: rgb(93, 170, 179);
+  --color-text-moderno: rgb(255, 255, 255);
+}
+
+
+.main-content {
+  padding-top: 80px;
+}
 .nav-menu {
+  position: fixed; /* Hace que el menú sea fijo en la pantalla */
+  top: 0; /* Lo coloca en la parte superior */
+  left: 0; /* Lo alinea al lado izquierdo */
+  width: 100%; /* Asegura que ocupe todo el ancho de la pantalla */
+background-color: var(--bg-color);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px;
     
+    z-index: 2000; /* Asegura que el menú esté sobre otros elementos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Añade una ligera sombra para destacar */
     
   }
   

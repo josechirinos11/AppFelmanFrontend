@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import clienteAxios from "../config/axios"; // Importa la configuración de axios
-import "../css/RecursosHumanos.css"; // Asegúrate de que los estilos sean los adecuados
+import "../css/global.css"; // Asegúrate de que los estilos sean los adecuados
 import { useAuth } from '../config/AuthContext';
 
 
@@ -9,13 +9,28 @@ const AgregarUsuarioTrabajador = ({ onClose, onAdd }) => {
     const { usuario } = useAuth(); // Extraer la función login del contexto
     const usuarioContexto = usuario || JSON.parse(localStorage.getItem('usuario'));
    
-  const [newTrabajador, setNewTrabajador] = useState({
-    "nombre" : "trabajador No 8",
-    "email" : "No8@correo.com",
-    "password" : "123456",
-    "usuarioId": usuarioContexto.idUSER
-  });
+    const [newTrabajador, setNewTrabajador] = useState({
+      "nombre": "trabajador No 8",
+      "email": "No8@correo.com",
+      "password": "123456",
+      "usuarioId": usuarioContexto.idUSER,
+      "rol": []  // Aquí agregamos los roles al estado del trabajador
+    });
  
+  // Lista de roles disponibles
+  const roles = [
+    'Recursos Humanos',
+    'Clientes y Ventas',
+    'Proveedores y Abastecimiento',
+    'Productos y Servicios',
+    'Finanzas',
+    'Operaciones y Logística',
+    'Documentación y Cumplimiento',
+    'Tecnología e Infraestructura',
+    'Marketing y Relaciones Públicas',
+    'Gestión de Calidad'
+  ];
+
 
   // Manejar el cambio en los campos del formulario
   const handleInputChange = (e) => {
@@ -25,9 +40,26 @@ const AgregarUsuarioTrabajador = ({ onClose, onAdd }) => {
       [name]: value,
     }));
   };
+
+  // Manejar el cambio en los roles seleccionados
+  const handleRoleChange = (role) => {
+    setNewTrabajador((prev) => {
+      const alreadySelected = prev.rol.includes(role);
+      return {
+        ...prev,
+        rol: alreadySelected
+          ? prev.rol.filter((r) => r !== role) // Eliminar el rol si ya está seleccionado
+          : [...prev.rol, role], // Agregar el rol si no está seleccionado
+      };
+    });
+  };
+
+
+
   
   // Función para agregar trabajador al servidor
   const handleAgregar = async () => {
+console.log(newTrabajador)
     try {
       const response = await clienteAxios.post(
         "/trabajadores/recursos-humanos",
@@ -88,7 +120,23 @@ const AgregarUsuarioTrabajador = ({ onClose, onAdd }) => {
             />
           </div>
 
-          
+          {/* Sección de roles */}
+          <div className="modal-input-container">
+            <label>Roles:</label>
+            <div className="roles-container">
+              {roles.map((role) => (
+                <label key={role}>
+                  <input
+                    type="checkbox"
+                    checked={newTrabajador.rol.includes(role)}
+                   
+                    onChange={() => handleRoleChange(role)}
+                  />
+                  {role}
+                </label>
+              ))}
+            </div>
+          </div>
 
           <div className="modal-buttons">
             <button

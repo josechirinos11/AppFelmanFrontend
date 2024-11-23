@@ -5,11 +5,15 @@ import { useNavigate } from 'react-router-dom';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+     // Estado para seleccionar el color de fondo
+     const [vista, setVista] = useState('claro'); // Por defecto, "claro"
     const [token, setToken] = useState(localStorage.getItem('token') || null);
     const [usuario, setUsuario] = useState(() => {
         const storedUsuario = localStorage.getItem('usuario');
         return storedUsuario ? JSON.parse(storedUsuario) : null;
     });
+
+    const [departamentosUSER, setDepartamentoUSER] = useState([])
     
     const navigate = useNavigate();
 
@@ -22,15 +26,21 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('usuario', JSON.stringify(userData)); // Guardar usuario en localStorage
         setToken(token);
         
-        const {nombreUSER, emailUSER, idUSER} = userData
+        if (userData) {
+            const { nombreUSER, emailUSER, idUSER, rolUSER } = userData;
+            setUsuario({ nombreUSER, emailUSER, idUSER, rolUSER });
+            console.log(rolUSER)
+          } else {
+            console.error("userData no está definido.");
+          }
        
-        setUsuario({nombreUSER, emailUSER, idUSER }); // Guarda la información del usuario
+        
         
         navigate('/mi-cuenta'); // Redirige a la página deseada
     };
         // Nueva función para actualizar el usuario
         const updateUser = (userData) => {
-            setUsuario({ nombre: userData.nombre, email: userData.email });
+            setUsuario({ nombre: userData.nombre, email: userData.email, rol: userData.rol });
         };
     
 
@@ -67,7 +77,18 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ token, login, logout, usuario, updateUser }}>
+        <AuthContext.Provider value={{
+            
+            token,
+            login,
+            logout,
+            usuario, 
+            updateUser, 
+            setDepartamentoUSER, 
+            departamentosUSER,
+            vista,
+            setVista
+             }}>
             {children}
         </AuthContext.Provider>
     );

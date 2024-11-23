@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import clienteAxios from '../config/axios';
-import '../css/RecursosHumanos.css';
+import '../css/global.css';
 import SSEComponent from '../config/SSEComponent';
 import AgregarUsuarioTrabajador from '../components/AgregarUsuarioTrabajador';
 import ConfirmDialog from '../components/ConfirmDialog';
