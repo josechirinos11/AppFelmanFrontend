@@ -26,10 +26,10 @@ export default function Empleado() {
           const response = await clienteAxios.get('/trabajadores/recursos-humanos');
           setData(response.data);  // Guardar datos de empleados
           setFilteredData(response.data);
-  
+
           // Fetch de los campos del modelo
           const responseCampos = await clienteAxios.get('/trabajadores/campos');
-         
+
           // Si necesitas guardar los campos en un estado diferente
           // puedes usar otro estado como `setCampos`.
         } catch (error) {
@@ -37,10 +37,10 @@ export default function Empleado() {
         }
       }
     };
-  
+
     fetchData();
   }, [informacion]);
-  
+
 
   // Función para filtrar los trabajadores por el término de búsqueda
   const handleSearch = (e) => {
@@ -84,7 +84,7 @@ export default function Empleado() {
   const handleDelete = async (IDtrabajador) => {
     try {
       const response = await clienteAxios.delete(`/trabajadores/recursos-humanos/${IDtrabajador}`);
- 
+
       alert(response.data.mensaje);
 
       // Recargar la lista de trabajadores
@@ -117,7 +117,7 @@ export default function Empleado() {
 
   return (
 
-<>
+    <>
       <button className="recursos-button" onClick={handleModalToggle}>
         Agregar Trabajador
       </button>
@@ -136,11 +136,11 @@ export default function Empleado() {
             <li key={trabajador._id} className="recursos-list-item">
               <strong>{trabajador.nombre}</strong>
               <strong
-          className={trabajador.confirmado ? "email-confirmado" : "email-no-confirmado"}
-          title={trabajador.confirmado ? "Confirmado" : "No confirmado"}
-        >
-          {trabajador.email}
-        </strong>
+                className={trabajador.confirmado ? "email-confirmado" : "email-no-confirmado"}
+                title={trabajador.confirmado ? "Confirmado" : "No confirmado"}
+              >
+                {trabajador.email}
+              </strong>
               <div>
                 <button onClick={() => handleEdit(trabajador._id)}>Editar</button>
                 <button onClick={() => openConfirmDialog(trabajador._id)}>Eliminar</button>
@@ -167,7 +167,7 @@ export default function Empleado() {
           onUpdate={handleAdd}  // Recargar los datos después de actualizar
         />
       )}
-      </>
- 
+    </>
+
   );
 }

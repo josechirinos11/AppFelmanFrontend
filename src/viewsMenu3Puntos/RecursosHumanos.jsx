@@ -75,11 +75,7 @@ export default function RecursosHumanos() {
   const renderComponent = () => {
     switch (informacion) {
       case "Empleados":
-        return (
-          <Empleado 
-           
-          />
-        );
+        return <Empleado />     
       case "Departamentos":
         return <Departamento />;
       case "Roles y permisos":

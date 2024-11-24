@@ -29,9 +29,19 @@ interface MenuItem {
 
 const NavMenu = () => {
   const navigate = useNavigate(); // Inicializar useNavigate solo una vez
-  const { logout, departamentosUSER } = useAuth();
-  const storedDepartamentos = localStorage.getItem('departamentos');
-  const departamentos = storedDepartamentos ? JSON.parse(storedDepartamentos) : [];
+  const { logout, departamentosUSER, usuario } = useAuth();
+
+  // por typescript
+  let departamentos: Departamento[] = [];
+  try {
+    const storedDepartamentos = localStorage.getItem('departamentos');
+    departamentos = storedDepartamentos ? JSON.parse(storedDepartamentos) : [];
+  } catch (error) {
+    console.error("Error al parsear los departamentos desde localStorage:", error);
+  }
+
+  const dptoActualizado = departamentos
+  
   const [filteredMenuItems, setFilteredMenuItems] = useState([]);
  // Estado para almacenar los departamentos actualizados
  const [menuItemsActualizada, setMenuItemsActualizada] = useState<{ title: string; items: string[] }[]>([]);
@@ -62,22 +72,66 @@ const NavMenu = () => {
 
 // useEffect para actualizar menuItemsActualizada cuando 'departamentos' cambie
 useEffect(() => {
+  // Recuperar el objeto 'usuario' de localStorage y parsearlo
+  const usuarioStr = localStorage.getItem('usuario'); // Obtener el string de 'usuario' desde localStorage
+
+  if (usuarioStr) {
+    const usuario = JSON.parse(usuarioStr);  // Parsear el string JSON a un objeto JavaScript
+    
+    // Verificamos si el rol del usuario es 'Administrador'
+    if (usuario.rolUSER && usuario.rolUSER[0] === "Administrador") {
+      // Crear los nuevos items de menú, filtrando y mapeando según lo que necesitas
+      const nuevaMenuItems = departamentos.map(departamento => ({
+        title: departamento.title,
+        items: departamento.items
+          .filter(item => item.active)  // Filtra los items activos
+          .map(item => item.name)       // Solo toma el nombre del item
+      }));
+
+      setMenuItemsActualizada(nuevaMenuItems); // Si es administrador, actualizamos el menú con los nuevos items
+      console.log("Eres administrador: "); // Muestra el resultado en consola
+    } else {
+      // Si no es un administrador, usaremos 'resultado' para configurar los items de menú
+      if (usuario.resultado) {
+        const nuevaMenuItems = usuario.resultado.map((departamento: { title: any; items: any[]; }) => ({
+          title: departamento.title,
+          items: departamento.items
+            .filter((item: { active: any; }) => item.active)  // Filtra los items activos
+            .map((item: { name: any; }) => item.name)       // Solo toma el nombre del item
+        }));
+
+        setMenuItemsActualizada(nuevaMenuItems); // Si es trabajador, actualizamos el menú
+        console.log("Eres Trabajador: "); // Muestra el resultado en consola
+      } else {
+        console.log("No se encontró 'resultado' en el usuario.");
+      }
+    }
+  } else {
+    console.log("No se encontró 'usuario' en localStorage.");
+  }
+}, []);  // Dependencia de 'departamentos', se ejecuta cada vez que cambia 'departamentos'
+
+/* // useEffect para actualizar menuItemsActualizada cuando 'departamentos' cambie
+useEffect(() => {
   const nuevaMenuItems = departamentos.map(departamento => ({
     title: departamento.title,
     items: departamento.items
       .filter(item => item.active)  // Filtra los items activos
       .map(item => item.name)       // Solo toma el nombre del item
   }));
-  
-  setMenuItemsActualizada(nuevaMenuItems);
-  console.log("Nuevo: ", nuevaMenuItems);  // Muestra el resultado en consola
-  console.log("viejo: ", departamentosUSER)
-  console.log("menu: ", menuItems)
+
+  const verificacion = localStorage.getItem(JSON.parse(('usuario')))
+  if (verificacion.rolUSER === "Administrador"){
+    setMenuItemsActualizada(nuevaMenuItems);
+    console.log("Eres administrador: ", nuevaMenuItems);  // Muestra el resultado en consola
+     }  else {
+      setMenuItemsActualizada(verificacion.rolUSER);
+    console.log("Eres Trabajador: ", nuevaMenuItems);  // Muestra el resultado en consola
+     }
+
 }, []);  // Dependencia vacía, solo se ejecuta una vez al montar
 
-
-
-
+ */
 
   // Manejar la navegación a diferentes rutas según el ítem
   const handleItemBoton = (title: string, item: string) => {
@@ -171,7 +225,7 @@ useEffect(() => {
   }, [isOptionsMenuOpen, isProfileMenuOpen]);
 
   return (
-    <nav className="nav-menu">
+    <nav className="nav-menu ">
       <div className="logo" onClick={toggleProfileMenu} ref={logoRef}>
         <img src={felmanImage} alt="Logo" className="logo-image" />
         {isProfileMenuOpen && (

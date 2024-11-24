@@ -10,8 +10,8 @@ const AgregarUsuarioTrabajador = ({ onClose, onAdd }) => {
     const usuarioContexto = usuario || JSON.parse(localStorage.getItem('usuario'));
    
     const [newTrabajador, setNewTrabajador] = useState({
-      "nombre": "trabajador No 8",
-      "email": "No8@correo.com",
+      "nombre": "trabajador No",
+      "email": "No@correo.com",
       "password": "123456",
       "usuarioId": usuarioContexto.idUSER,
       "rol": []  // Aquí agregamos los roles al estado del trabajador
@@ -78,9 +78,14 @@ console.log(newTrabajador)
       console.error("Error al agregar trabajador:", error);
     }
   };
-
+  const handleOverlayClick = (e) => {
+    // Verifica si el clic ocurrió fuera del modal-container
+    if (e.target.classList.contains('modal-overlay')) {
+      onClose();
+    }
+  };
   return (
-    <div className="modal-overlay">
+    <div className="modal-overlay" onClick={handleOverlayClick}>
       <div className="modal-container">
         <h2>Agregar Nuevo Trabajador</h2>
         <form>

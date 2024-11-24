@@ -4,6 +4,7 @@ import menuItems from "../config/menuItems";
 import { useAuth } from '../config/AuthContext';
 import ActualizarTrabajador from "../components/ActualizarTrabajador";
 import MostrarDepartamentos from "../components/MostrarDepartamentos";
+import "../css/global.css"
 
 export default function Ajustes() {
   const { departamentosUSER, vista, setVista, usuario } = useAuth(); // Extraer la vista del contexto
@@ -62,6 +63,7 @@ export default function Ajustes() {
 
     fetchData();
     fetchTrabajador()
+    
   }, []);  // Sincronización de la carga de campos
 
 
@@ -74,6 +76,8 @@ export default function Ajustes() {
         '--form-bg': 'var(--form-bg-claro)',
         '--form-border': 'var(--form-border-claro)',
         '--form-text': 'var(--form-text-claro)',
+        '--c-b': 'var(--c-b-moderno)',
+        '--c-shadow': 'var(--c-shadow-moderno)',
       },
       oscuro: {
         '--bg-color': 'var(--bg-color-oscuro)',
@@ -88,6 +92,8 @@ export default function Ajustes() {
         '--form-bg': 'var(--form-bg-moderno)',
         '--form-border': 'var(--form-border-moderno)',
         '--form-text': 'var(--form-text-moderno)',
+        '--c-b': 'var(--c-b-moderno)',
+        '--c-shadow': 'var(--c-shadow-moderno)',
       },
     };
 
@@ -126,7 +132,7 @@ export default function Ajustes() {
         trabajador
       );
       console.log("Trabajador actualizado:", response.data);
-     
+      alert("Se actualizaron los datos.");
    
     } catch (error) {
       console.error("Error al actualizar trabajador:", error);
@@ -193,7 +199,8 @@ export default function Ajustes() {
       </form>
 
       {/* Formulario Departamentos a Gestionar */}
-      <MostrarDepartamentos />
+      {usuario?.rolUSER[0] === "Administrador" ? <MostrarDepartamentos /> : <h1>no se muestra nada</h1>}
+     
     </div>
   );
 }

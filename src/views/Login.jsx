@@ -8,7 +8,7 @@ import { useAuth } from '../config/AuthContext';
 export default function Login() {
     const { login, setDepartamentoUSER } = useAuth(); // Extraer la función login del contexto
 
-    const [email, setEmail] = useState('jose@jose.com');
+    const [email, setEmail] = useState('josechirinos11@gmail.com');
     const [password, setPassword] = useState('123456');
 
 
@@ -23,6 +23,39 @@ export default function Login() {
     const [alerta, setAlerta] = useState({});
     const [cargando, setCargando] = useState(false); // Nuevo estado para controlar la carga
     const navigate = useNavigate(); // Inicializar useNavigate
+
+
+//para el scroll
+useEffect(() => {
+    const scrollToBottom = () => {
+      const totalHeight = document.body.scrollHeight; // Altura total de la página
+      const scrollDuration = 2000; // 2 segundos en milisegundos
+
+      const startPosition = window.scrollY; // Posición actual
+      const distance = totalHeight - startPosition; // Distancia hasta el final
+      const startTime = performance.now(); // Momento inicial
+
+      const step = (currentTime) => { // No necesitas tipos en JSX
+        const elapsed = currentTime - startTime; // Tiempo transcurrido
+        const progress = Math.min(elapsed / scrollDuration, 1); // Progreso en % (máximo 1)
+        const easeInOutCubic = progress < 0.5
+          ? 4 * progress * progress * progress
+          : 1 - Math.pow(-2 * progress + 2, 3) / 2; // Función de suavizado
+
+        window.scrollTo(0, startPosition + distance * easeInOutCubic); // Calcula posición actual
+
+        if (elapsed < scrollDuration) {
+          requestAnimationFrame(step); // Sigue animando si no ha terminado
+        }
+      };
+
+      requestAnimationFrame(step); // Inicia la animación
+    };
+
+    scrollToBottom();
+  }, []);
+
+
 
 
     useEffect(() => {
@@ -85,14 +118,14 @@ export default function Login() {
 
             const data = response.data;
             
-            const { token, nombre: nombreUSER, email: emailUSER, _id: idUSER, rol: rolUSER } = data;
+            const { token, nombre: nombreUSER, email: emailUSER, _id: idUSER, rol: rolUSER, departamentos: dptoUSER } = data;
             //  const expirationInMinutes = 60; // Por ejemplo, 1 hora
             //   const expirationDate = new Date(Date.now() + expirationInMinutes * 60000);
 
             console.log(data);
             
             console.log("SE ENVIA INFORMACION DE LOGIN AL CONTEX");
-            login(token, 60, { nombreUSER, emailUSER, idUSER, rolUSER })
+            login(token, 60, { nombreUSER, emailUSER, idUSER, rolUSER, dptoUSER })
             setDepartamentoUSER(data.departamentos)
             localStorage.setItem('departamentos', JSON.stringify(data.departamentos)); // Guarda en localStorage
 

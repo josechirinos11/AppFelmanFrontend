@@ -27,9 +27,39 @@ export const AuthProvider = ({ children }) => {
         setToken(token);
         
         if (userData) {
-            const { nombreUSER, emailUSER, idUSER, rolUSER } = userData;
-            setUsuario({ nombreUSER, emailUSER, idUSER, rolUSER });
-            console.log(rolUSER)
+            const { nombreUSER, emailUSER, idUSER, rolUSER, dptoUSER } = userData;
+
+            // recreamos los departamentos de acuerdo a los roles del usuario
+            const actualizarDepartamentos = (rolUSER, dptoUSER) => {
+                // Mapeamos los departamentos
+                return dptoUSER.map(depto => {
+                  // Si el title del departamento está en los roles del usuario, actualizamos sus items
+                  if (rolUSER.includes(depto.title)) {
+                    return {
+                      ...depto,
+                      items: depto.items.map(item => ({
+                        ...item,
+                        active: true,  // Activamos todos los items si el título está en los roles
+                      })),
+                    };
+                  }
+              
+                  // Si el title no está en los roles, dejamos los items desactivados
+                  return {
+                    ...depto,
+                    items: depto.items.map(item => ({
+                      ...item,
+                      active: false, // Desactivamos los items si el título no está en los roles
+                    })),
+                  };
+                });
+              };
+              const resultado = actualizarDepartamentos(rolUSER, dptoUSER);
+
+              console.log(resultado)
+              // guardamos los resultados en usuario
+            setUsuario({ nombreUSER, emailUSER, idUSER, rolUSER, dptoUSER, resultado });
+            
           } else {
             console.error("userData no está definido.");
           }
@@ -40,7 +70,7 @@ export const AuthProvider = ({ children }) => {
     };
         // Nueva función para actualizar el usuario
         const updateUser = (userData) => {
-            setUsuario({ nombre: userData.nombre, email: userData.email, rol: userData.rol });
+            setUsuario({ nombre: userData.nombre, email: userData.email, rol: userData.rol, departamentos: userData.departamentos });
         };
     
 
@@ -59,6 +89,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('token');
         localStorage.removeItem('tokenExpiration');
         localStorage.removeItem('usuario');
+        localStorage.removeItem('departamentos');
         setToken(null);
         setUsuario(null); // Limpia la información del usuario
         navigate('/login'); // Redirige a la página de login

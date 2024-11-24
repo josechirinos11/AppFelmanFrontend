@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import clienteAxios from "../config/axios";
 import "../css/ActualizarTrabajador.css";
 import "../css/RecursosHumanos.css";
+import { useAuth } from "../config/AuthContext";
 
 const ActualizarTrabajador = ({ trabajadorId, onClose, onUpdate }) => {
+  const { setDepartamentoUSER } = useAuth(); // Extraer la función login del contexto
   const [campos, setCampos] = useState([]); // Campos del modelo
   const [trabajador, setTrabajador] = useState({}); // Datos del trabajador
   const [loading, setLoading] = useState(true); // Estado para manejar la carga de datos
@@ -100,9 +102,15 @@ const ActualizarTrabajador = ({ trabajadorId, onClose, onUpdate }) => {
   if (loading) {
     return <div>Cargando...</div>; // Muestra un mensaje mientras los datos se cargan
   }
+  const handleOverlayClick = (e) => {
+    // Verifica si el clic ocurrió fuera del modal-container
+    if (e.target.classList.contains('modal')) {
+      onClose(); // Cerrar el modal
+    }
+  };
 
   return (
-    <div className="modal">
+    <div className="modal"  onClick={handleOverlayClick}>
       <div className="modal-content">
         <h2>Actualizar Trabajador</h2>
         <form onSubmit={handleUpdate}>
