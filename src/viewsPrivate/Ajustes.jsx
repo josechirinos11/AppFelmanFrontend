@@ -72,28 +72,52 @@ export default function Ajustes() {
     const temaVariables = {
       claro: {
         '--bg-color': 'var(--bg-color-claro)',
+        '--bg-2doPiso':'var(--bg-2doPiso-claro)',
+        '--bg-3erPiso':'var(--bg-3erPiso-claro)',
+        '--bg-4toPiso':'var(--bg-4toPiso-claro)',
+        '--color-text':'var(--color-text-claro)',
         '--bg-recursos-container': 'var(--bg-2doPiso-claro)',
         '--form-bg': 'var(--form-bg-claro)',
         '--form-border': 'var(--form-border-claro)',
         '--form-text': 'var(--form-text-claro)',
-        '--c-b': 'var(--c-b-moderno)',
-        '--c-shadow': 'var(--c-shadow-moderno)',
+        '--c-b': 'var(--c-b-claro)',
+        '--c-shadow': 'var(--c-shadow-claro)',
+        '--c-primary':'var(--c-primary-claro)',
+        '--c-primary-hover':'var(--c-primary-hover-claro)',
+        '--text-color':'var(--text-color-claro)',
       },
       oscuro: {
         '--bg-color': 'var(--bg-color-oscuro)',
         '--bg-recursos-container': 'var(--bg-2doPiso-oscuro)',
+        '--bg-2doPiso':'var(--bg-2doPiso-oscuro)',
+        '--bg-3erPiso':'var(--bg-3erPiso-oscuro)',
+        '--bg-4toPiso':'var(--bg-4toPiso-oscuro)',
+        '--color-text':'var(--color-text-oscuro)',
         '--form-bg': 'var(--form-bg-oscuro)',
         '--form-border': 'var(--form-border-oscuro)',
         '--form-text': 'var(--form-text-oscuro)',
+        '--c-b': 'var(--c-b-oscuro)',
+        '--c-shadow': 'var(--c-shadow-oscuro)',
+        '--c-primary':'var(--c-primary-oscuro)',
+        '--c-primary-hover':'var(--c-primary-hover-oscuro)',
+        '--text-color':'var(--text-color-oscuro)',
+       
       },
       moderno: {
-        '--bg-color': 'var(--bg-color-moderno)',
+        '--bg-color': 'var(--bg-3erPiso-moderno)',
         '--bg-recursos-container': 'var(--bg-2doPiso-moderno)',
+        '--bg-2doPiso':'var(--bg-2doPiso-moderno)',
+        '--bg-3erPiso':'var(--bg-3erPiso-moderno)',
+        '--bg-4toPiso':'var(--bg-4toPiso-moderno)',
+        '--color-text':'var(--color-text-moderno)',
         '--form-bg': 'var(--form-bg-moderno)',
         '--form-border': 'var(--form-border-moderno)',
         '--form-text': 'var(--form-text-moderno)',
         '--c-b': 'var(--c-b-moderno)',
         '--c-shadow': 'var(--c-shadow-moderno)',
+        '--c-primary':'var(--c-primary-moderno)',
+        '--c-primary-hover':'var(--c-primary-hover-moderno)',
+        '--text-color':'var(--text-color-moderno)',
       },
     };
 
@@ -141,11 +165,11 @@ export default function Ajustes() {
   };
 
   return (
-    <div className="recursos-container">
+    <div className="recursos-container ">
       <h1 className="recursos-title">Ajustes</h1>
 
       {/* Formulario Datos de Cuenta */}
-      <div className="actualizar-modal">
+      <div className="actualizar-modal ">
 
        
         <form className="form-container" onSubmit={handleUpdate}>
@@ -181,7 +205,7 @@ export default function Ajustes() {
       </div>
 
       {/* Formulario Vista */}
-      <form className="form-container">
+      <form className="form-container ">
         <h2>Vista</h2>
         <div className="form-group">
           {["claro", "oscuro", "moderno"].map((tema) => (

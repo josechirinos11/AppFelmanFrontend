@@ -11,28 +11,109 @@
   margin: 20px;
   padding: 20px;
   border-radius: 8px;
-  border: 2px solid var(--c-b); /* Borde con el color deseado */
+  
   box-shadow: 0 4px 8px var(--c-shadow); /* Sombra con un color similar al borde */
-  background-color: var(--bg-color);
+  background-color: var(--bg-2doPiso);
+  color: var(--color-text);
 }
+
 
 
 .bg-base {
-    background-color: var(--bg-color);
+  background-color: var(--bg-color); /* Fondo para el contenedor */
+  color: var(--color-text);         /* Color del texto */
+  font-family: var(--font-family);  /* Fuente del texto */
 }
 
-.aplicarTema {
-  border: 2px solid var(--c-b); /* Borde con el color deseado */
-  box-shadow: 0 4px 8px var(--c-shadow); /* Sombra con un color similar al borde */
-  background-color: var(--bg-color);
+.bg-base h1, 
+.bg-base label, 
+.bg-base input, 
+.bg-base button, 
+.bg-base p, 
+.bg-base textarea, 
+.bg-base select {
+  color: var(--color-text); /* Heredan el color del texto del contenedor */
+  font-family: inherit; /* Heredan la fuente del contenedor */
+  
 }
+
+/* Estilo base para inputs, botones, selects, y textarea */
+.bg-base input, 
+.bg-base textarea, 
+.bg-base ul,
+.bg-base li,
+.bg-base select{
+  background-color: var(--bg-3erPiso); /* Fondo del input o botón */
+  color: var(--text-color);         /* Color del texto */
+  border: var(--c-b); /* Borde basado en la variable */
+  border-radius: 4px; /* Bordes redondeados opcionales */
+  padding: 8px; /* Espaciado interno */
+  box-sizing: border-box; /* Asegura que el padding no afecte el tamaño */
+  box-shadow: var(--c-b);
+}
+.bg-base ul li button {
+  
+  background-color: var(--bg-3erPiso); /* Fondo del input o botón */
+  color: var(--text-color);         /* Color del texto */
+  border: var(--c-b); /* Borde basado en la variable */
+  border-radius: 4px; /* Bordes redondeados opcionales */
+  padding: 8px; /* Espaciado interno */
+  box-sizing: border-box; /* Asegura que el padding no afecte el tamaño */
+  box-shadow: 0 4px 8px var(--c-shadow)
+}
+
+.bg-base ul li {
+
+  border-bottom: 2px solid var(--c-b);
+}
+
+.bg-base button {
+  background-color: var(--bg-3erPiso); /* Fondo del input o botón */
+  color: var(--text-color);         /* Color del texto */
+  border: var(--c-b); /* Borde basado en la variable */
+  border-radius: 4px; /* Bordes redondeados opcionales */
+  padding: 8px; /* Espaciado interno */
+  box-sizing: border-box; /* Asegura que el padding no afecte el tamaño */
+  box-shadow: 0 4px 8px var(--c-shadow)
+}
+
+
+
+/* Hover y focus */
+.bg-base input:hover, 
+.bg-base textarea:hover, 
+.bg-base select:hover,
+.bg-base button:hover {
+  background-color: var(--c-primary);
+  color: var(--bg-3erPiso)
+}
+
+.bg-base input:focus, 
+.bg-base textarea:focus, 
+.bg-base select:focus {
+  outline: none; /* Elimina el contorno por defecto */
+  border-color: var(--border-focus); /* Borde al enfocarse */
+  box-shadow: 0 0 4px var(--border-focus); /* Efecto visual al enfocarse */
+}
+
 
 
 :root {
   /* Variables globales */
-  --color-primary: rgb(239, 68, 68);
+  --color-primary2: rgb(239, 68, 68);
+  --color-primary: rgb(227, 24, 54);
   --color-primary-hover: #C0392B;
   --font-main: 'Arial', sans-serif;
+  --c-primary: rgb(239, 68, 68);
+  --c-primary-hover: #C0392B;
+    --bg-color: rgb(243, 244, 246);
+    --bg-2doPiso: rgb(229, 231, 235);
+    --bg-3erPiso: rgb(209, 213, 219);
+    --bg-4toPiso: rgb(156, 163, 175);
+    --color-text: #f40707;
+    --c-b: rgb(156, 163, 175);
+    --c-shadow: #333;
+    --text-color: #333333; 
 
   /* Tema claro */
   --bg-color-claro: rgb(243, 244, 246);
@@ -40,24 +121,87 @@
   --bg-3erPiso-claro: rgb(209, 213, 219);
   --bg-4toPiso-claro: rgb(156, 163, 175);
   --color-text-claro: #333;
-  --c-b-moderno: rgb(156, 163, 175);
-  --c-shadow-moderno: #333;
+  --c-b-claro: rgb(156, 163, 175);
+  --c-shadow-claro: #333;
+  --c-primary-claro: rgb(227, 24, 54);
+  --c-primary-hover-claro: rgb(173, 19, 42);
+  --text-color-claro: #333;
 
   /* Tema oscuro */
-  --bg-color-oscuro: rgb(15, 23, 42);
-  --bg-2doPiso-oscuro: rgb(30, 41, 59);
+  --bg-color-oscuro: rgb(0, 0, 0);
+  --bg-2doPiso-oscuro: rgb(30, 31, 32);
   --bg-3erPiso-oscuro: rgb(51, 65, 85);
   --bg-4toPiso-oscuro: rgb(71, 85, 105);
-  --color-text-oscurio: rgb(209, 213, 219);
+  --color-text-oscuro: rgb(209, 213, 219);
+  --c-b-oscurio: rgb(156, 163, 175);
+  --c-shadow-oscurio: rgb(71, 85, 105);
+  --c-primary-oscurio: rgb(71, 85, 105);
+  --c-primary-hover-oscurio: rgb(51, 65, 85);
+  --text-color-oscurio: rgb(156, 163, 175); 
 
   /* Tema moderno    rgb(0, 2, 1)  */
-  --bg-color-moderno: red;
-  --bg-2doPiso-moderno: rgb(38, 77, 86);
-  --bg-3erPiso-moderno: rgb(121, 255, 255);
+  --bg-color-moderno: rgb(6, 28, 49);
+  --bg-2doPiso-moderno: rgb(8, 28, 47);
+  --bg-3erPiso-moderno: rgb(3, 17, 29);
   --bg-4toPiso-moderno: rgb(93, 170, 179);
   --color-text-moderno: rgb(255, 255, 255);
-  --c-b-moderno: rgba(3, 255, 253, 0.5);
-  --c-shadow-moderno: rgba(3, 255, 253, 0.5);
+  --c-b-moderno: rgb(186, 242, 252);
+  --c-shadow-moderno: rgb(64, 124, 131);
+  --c-primary-moderno: rgb(186, 242, 252);
+  --c-primary-hover-moderno: rgb(93, 170, 179);
+  --text-color-moderno: rgb(93, 170, 179);; 
+
+
+
+/* Tema claro */
+
+ 
+  --text-color: #333333;      /* Texto oscuro */
+  --font-family: 'Arial', sans-serif; /* Fuente base */
+
+  --input-bg: #f9f9f9;        /* Fondo de inputs */
+  --input-text: #333333;      /* Texto en inputs */
+  --border-color: #cccccc;    /* Color del borde */
+  --border-hover: #999999;    /* Color del borde al pasar el cursor */
+  --border-focus: #007bff;    /* Color del borde al enfocarse */
+
+  --button-bg: #007bff;       /* Fondo del botón */
+  --button-text: #ffffff;     /* Texto del botón */
+  --button-hover-bg: #0056b3; /* Fondo del botón al pasar el cursor */
+}
+
+/* Tema oscuro */
+.theme-dark {
+  --bg-color: #1e1e1e;        /* Fondo oscuro */
+  --text-color: #f0f0f0;      /* Texto claro */
+  --font-family: 'Roboto', sans-serif;
+
+  --input-bg: #333333;        /* Fondo oscuro de inputs */
+  --input-text: #f0f0f0;      /* Texto claro en inputs */
+  --border-color: #555555;    /* Borde oscuro */
+  --border-hover: #777777;    /* Color del borde al pasar el cursor */
+  --border-focus: #1e90ff;    /* Color del borde al enfocarse */
+
+  --button-bg: #1e90ff;       /* Fondo del botón */
+  --button-text: #ffffff;     /* Texto del botón */
+  --button-hover-bg: #00509e; /* Fondo del botón al pasar el cursor */
+}
+
+/* Tema personalizado (ejemplo: tema rojo) */
+.theme-red {
+  --bg-color: #ffe5e5;        /* Fondo claro rojizo */
+  --text-color: #5a0000;      /* Texto rojo oscuro */
+  --font-family: 'Georgia', serif;
+
+  --input-bg: #fff2f2;        /* Fondo de inputs */
+  --input-text: #5a0000;      /* Texto en inputs */
+  --border-color: #d90000;    /* Borde rojo */
+  --border-hover: #ff3333;    /* Color del borde al pasar el cursor */
+  --border-focus: #ff6666;    /* Color del borde al enfocarse */
+
+  --button-bg: #d90000;       /* Fondo del botón */
+  --button-text: #ffffff;     /* Texto del botón */
+  --button-hover-bg: #a00000; /* Fondo del botón al pasar el cursor */
 }
 
 body {
@@ -86,6 +230,7 @@ button {
 
 /* Estilos Modales */
 .actualizar-modal {
+  background-color: var(--bg-2doPiso);
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* Distribuye los elementos con espacio entre ellos */
@@ -97,7 +242,7 @@ button {
 .actualizar-modal-content {
     background: white;
     padding: 20px;
-    border-radius: 5px;
+    
     width: 400px;
     max-width: 100%;
 }
@@ -139,9 +284,7 @@ button {
     width: 100%;
   }
   
-  .recursos-button:hover {
-    background-color: #C0392B;
-  }
+  
   
   /* Estilo para el input de búsqueda */
   .recursos-input {
@@ -162,6 +305,7 @@ button {
   }
   
   .recursos-list-item {
+    
     background-color: #fff;
     border: px solid #ddd;
     border-radius: 5px;
@@ -177,10 +321,7 @@ button {
     
   }
   
-  .recursos-list-item:last-child {
-    border-bottom: none;
-    
-  }
+
   
   .no-results {
     color: #666;
@@ -288,7 +429,7 @@ button {
 }
 
 .recursos-list-item button:hover {
-  background: #C0392B;
+  background: var(--c-primary);
 }
 
 
@@ -402,54 +543,6 @@ button.recursos-button {
 h1, h2, label, strong {
     transition: all 0.5s ease; /* Transición suave cuando cambia el tema */
 }
-
-/* --- Estilos para el tema Claro --- */
-:root {
-    --color-h1-claro: #1f2937;  /* Gris oscuro para h1 */
-    --color-h2-claro: #374151;  /* Gris medio para h2 */
-    --color-label-claro: #4b5563; /* Gris más suave para label */
-    --color-strong-claro: #111827; /* Gris muy oscuro para strong */
-}
-
-/* --- Estilos para el tema Oscuro --- */
-:root {
-    --color-h1-oscuro: #f3f4f6;  /* Blanco o gris claro para h1 */
-    --color-h2-oscuro: #e5e7eb;  /* Gris claro para h2 */
-    --color-label-oscuro: #d1d5db; /* Gris medio para label */
-    --color-strong-oscuro: #ffffff; /* Blanco para strong */
-}
-
-/* --- Estilos para el tema Moderno --- */
-:root {
-    --color-h1-moderno: #e0f7fa;  /* Azul claro para h1 */
-    --color-h2-moderno: #80deea;  /* Azul más oscuro para h2 */
-    --color-label-moderno: #00bcd4; /* Azul brillante para label */
-    --color-strong-moderno: #00796b; /* Verde oscuro para strong */
-}
-
-:root {
-  /* Variables para el tema claro */
-  --bg-color-claro: #ffffff;
-  --bg-2doPiso-claro: #f4f4f4;
-  --form-bg-claro: #ffffff;
-  --form-border-claro: #ddd;
-  --form-text-claro: #333;
-
-  /* Variables para el tema oscuro */
-  --bg-color-oscuro: #1f2937;
-  --bg-2doPiso-oscuro: #374151;
-  --form-bg-oscuro: #1f2937;
-  --form-border-oscuro: #444;
-  --form-text-oscuro: #e5e7eb;
-
-  /* Variables para el tema moderno */
-  --bg-color-moderno: #263238;
-  --bg-2doPiso-moderno: #37474f;
-  --form-bg-moderno: #263238;
-  --form-border-moderno: #4f5b62;
-  --form-text-moderno: #b2ebf2;
-}
-
 
 /* Estilos h1 */
 h1 {
@@ -568,7 +661,7 @@ color: #2c3e50;
 /* Estilo de los inputs */
 .actualizar-modal form input {
 padding: 8px;
-border: 1px solid #ccc;
+border: var(--c-b);
 border-radius: 5px;
 margin-top: 5px;
 font-size: 14px;
@@ -577,11 +670,18 @@ box-sizing: border-box;
 }
 .actualizar-modal form  {
   padding: 8px;
-  border: 1px solid #ccc;
+  
   border-radius: 5px;
   margin-top: 5px;
   font-size: 14px;
   width: 100%;
+  }
+  .actualizar-modal form button {
+    background-color: var(--bg-3erPiso)
+  }
+  .actualizar-modal form button:hover {
+    background-color: var(--c-primary);
+    color: var(--bg-3erPiso)
   }
 
 /* Resaltar labels al pasar sobre el campo */
@@ -667,4 +767,170 @@ background: #c0392b;
   accent-color: #007bff; /* Cambia el color del checkbox según tu tema */
   width: 16px;
   height: 16px;
+}
+/* NavMenu.css */
+
+
+
+.main-content {
+  padding-top: 80px;
+}
+.nav-menu {
+  position: fixed; /* Hace que el menú sea fijo en la pantalla */
+  top: 0; /* Lo coloca en la parte superior */
+  left: 0; /* Lo alinea al lado izquierdo */
+  width: 100%; /* Asegura que ocupe todo el ancho de la pantalla */
+background-color: var(--bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    
+    z-index: 2000; /* Asegura que el menú esté sobre otros elementos */
+    box-shadow: 0 2px 5px var(--c-shadow); /* Añade una ligera sombra para destacar */
+    border-bottom: 2px solid var(--c-b);
+    
+  }
+  
+  /* Logo */
+  .logo {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .logo-image {
+    width: 80px;
+    height: 40px;
+    
+  }
+  
+  /* Menú de perfil */
+/* Menú de perfil */
+.profile-menu {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 250px;
+    background-color: var(--bg-3erPiso);
+    border: var(--c-b);
+    border-radius: 5px;
+    box-shadow: 0 4px 8px var(--c-shadow);
+    padding: 10px;
+    z-index: 10;
+    text-align: center; /* Para centrar el texto */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el contenido horizontalmente */
+  }
+  
+  /* Imagen de perfil */
+  .profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  
+  /* Barra de búsqueda */
+  .search-bar {
+    position: relative;
+    flex: 1;
+    max-width: 400px;
+  }
+  
+  .search-bar input {
+    width: 100%;
+    padding: 8px 30px 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+  }
+  
+  .search-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+  }
+  
+  /* Menú de opciones */
+  .options-menu {
+    position: relative; /* Asegura que el menú desplegable se posicione dentro del contenedor */
+    float: right;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    width: 300px;
+    background-color: white;
+    
+    
+    z-index: 10;
+  }
+  
+  .options-icon {
+    cursor: pointer;
+    font-size: 20px;
+    color: #333;
+  }
+  
+  /* Dropdown del menú de opciones */
+  .dropdown-item {
+    
+   
+    cursor: pointer; /* Asegura que el usuario sepa que es interactivo */
+    background-color: var(--bg-3erPiso);
+    border: px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px var(--c-shadow);
+    z-index: 10;
+    width: 'auto';
+  }
+  
+ 
+ 
+  .sub-dropdown-menu {
+    background-color: var(--bg-2doPiso);
+  }
+  
+  .dropdown-menu button {
+    width: 100%;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu button:hover {
+    background-color: #f0f0f0;
+  }
+  .felman-button {
+width: 200px;
+margin: 10px;
+    background-color: rgb(239 68 68); /* Reemplaza con el color del logo de Felman */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de fuente */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    transition: background-color 0.3s; /* Transición suave al cambiar el color de fondo */
+}
+
+.felman-button:hover {
+    background-color: #C0392B; /* Color al pasar el mouse, usa un color más oscuro o diferente */
+}
+.custom-icon {
+  color: rgb(239, 68, 68); /* Cambia el color del ícono */
+  font-size: 24px; /* Ajusta el tamaño del ícono si es necesario */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el ícono */
+}
+
+/* Otras propiedades para mejorar el aspecto */
+.custom-icon:hover {
+  color: rgb(220, 34, 34); /* Color al pasar el mouse, opcional */
 }
