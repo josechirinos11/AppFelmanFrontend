@@ -8,7 +8,7 @@ import { useAuth } from '../config/AuthContext';
 export default function Login() {
     const { login, setDepartamentoUSER } = useAuth(); // Extraer la función login del contexto
 
-    const [email, setEmail] = useState('josechirinos11@gmail.com');
+    const [email, setEmail] = useState('No1@correo.com');
     const [password, setPassword] = useState('123456');
 
 

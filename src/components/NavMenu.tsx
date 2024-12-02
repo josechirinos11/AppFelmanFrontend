@@ -93,6 +93,7 @@ useEffect(() => {
     } else {
       // Si no es un administrador, usaremos 'resultado' para configurar los items de menú
       if (usuario.resultado) {
+        console.log(usuario.resultado)
         const nuevaMenuItems = usuario.resultado.map((departamento: { title: any; items: any[]; }) => ({
           title: departamento.title,
           items: departamento.items
