@@ -223,7 +223,7 @@ export default function Ajustes() {
       </form>
 
       {/* Formulario Departamentos a Gestionar */}
-      {usuario?.rolUSER[0] === "Administrador" ? <MostrarDepartamentos /> : <h1>no se muestra nada</h1>}
+      {usuario?.rolUSER[0] === "Administrador" ? <MostrarDepartamentos /> : <h1>No eres administrado</h1>}
      
     </div>
   );

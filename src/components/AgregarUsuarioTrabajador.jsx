@@ -75,7 +75,7 @@ console.log(newTrabajador)
       onAdd(); // Llama a onAdd para actualizar la lista de trabajadores
       onClose(); // Cierra el modal después de agregar el trabajador
     } catch (error) {
-      console.error("Error al agregar trabajador:", error);
+      console.error("Error al agregar trabajadorrrrrr:", error);
     }
   };
   const handleOverlayClick = (e) => {
