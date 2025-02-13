@@ -24,34 +24,34 @@ export default function CrearCuenta() {
 
 
     //para el scroll
-useEffect(() => {
-    const scrollToBottom = () => {
-      const totalHeight = document.body.scrollHeight; // Altura total de la página
-      const scrollDuration = 2000; // 2 segundos en milisegundos
+    useEffect(() => {
+        const scrollToBottom = () => {
+            const totalHeight = document.body.scrollHeight; // Altura total de la página
+            const scrollDuration = 2000; // 2 segundos en milisegundos
 
-      const startPosition = window.scrollY; // Posición actual
-      const distance = totalHeight - startPosition; // Distancia hasta el final
-      const startTime = performance.now(); // Momento inicial
+            const startPosition = window.scrollY; // Posición actual
+            const distance = totalHeight - startPosition; // Distancia hasta el final
+            const startTime = performance.now(); // Momento inicial
 
-      const step = (currentTime) => { // No necesitas tipos en JSX
-        const elapsed = currentTime - startTime; // Tiempo transcurrido
-        const progress = Math.min(elapsed / scrollDuration, 1); // Progreso en % (máximo 1)
-        const easeInOutCubic = progress < 0.5
-          ? 4 * progress * progress * progress
-          : 1 - Math.pow(-2 * progress + 2, 3) / 2; // Función de suavizado
+            const step = (currentTime) => { // No necesitas tipos en JSX
+                const elapsed = currentTime - startTime; // Tiempo transcurrido
+                const progress = Math.min(elapsed / scrollDuration, 1); // Progreso en % (máximo 1)
+                const easeInOutCubic = progress < 0.5
+                    ? 4 * progress * progress * progress
+                    : 1 - Math.pow(-2 * progress + 2, 3) / 2; // Función de suavizado
 
-        window.scrollTo(0, startPosition + distance * easeInOutCubic); // Calcula posición actual
+                window.scrollTo(0, startPosition + distance * easeInOutCubic); // Calcula posición actual
 
-        if (elapsed < scrollDuration) {
-          requestAnimationFrame(step); // Sigue animando si no ha terminado
-        }
-      };
+                if (elapsed < scrollDuration) {
+                    requestAnimationFrame(step); // Sigue animando si no ha terminado
+                }
+            };
 
-      requestAnimationFrame(step); // Inicia la animación
-    };
+            requestAnimationFrame(step); // Inicia la animación
+        };
 
-    scrollToBottom();
-  }, []);
+        scrollToBottom();
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -151,7 +151,7 @@ useEffect(() => {
 
     return (
         <>
- <div>
+            <div>
                 <img
                     src={felmanImage}
                     alt="Descripción de la imagen"

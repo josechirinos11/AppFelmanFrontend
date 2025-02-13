@@ -1,0 +1,87 @@
+/* ContratistasYConsultoresExternos.css */
+.contratistas-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f4f4f4;
+    position: relative; /* Para posicionar el modal */
+}
+
+.contratistas-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 600px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contratista-item {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+}
+
+.contratista-item:last-child {
+    border-bottom: none;
+}
+
+.contratista-item:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.02);
+}
+
+.contratista-item:active {
+    transform: scale(0.98);
+}
+
+.contratista-info {
+    flex-grow: 1;
+}
+
+.contratista-nombre {
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: bold;
+}
+
+.contratista-ubicacion {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.contratista-modal {
+    position: absolute; /* Posición absoluta para que se desplace con el scroll */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 10; /* Asegura que el modal esté por encima de la lista */
+}
+
+.modal-nombre {
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: bold;
+}
+
+.modal-ubicacion {
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.modal-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

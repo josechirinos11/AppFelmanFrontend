@@ -1,0 +1,47 @@
+.info-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  .info-content {
+    display: flex;
+    width: 80%;
+    max-width: 1200px;
+    gap: 20px; /* Espacio entre tarjetas */
+  }
+  
+  .info-card {
+    background-color: #f5f5f5; /* Fondo gris claro */
+    border: 1px solid #e0e0e0; /* Borde gris suave */
+    border-radius: 8px; /* Esquinas ligeramente redondeadas */
+    padding: 20px;
+    margin: 20px 0;
+    font-family: 'Roboto', sans-serif; /* Tipografía moderna */
+    color: #333; /* Texto en gris oscuro */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+  
+  .info-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .info-message {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+  
+.info-contact p {
+    margin: 5px 0;
+}
+  
+  .info-thumbnail {
+    width: 100%; /* Ocupa todo el ancho de la tarjeta */
+    height: auto;
+    border-radius: 8px;
+    cursor: pointer;
+    object-fit: cover; /* Cubre todo el espacio sin deformar la imagen */
+  }

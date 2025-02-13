@@ -1,5 +1,6 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom';
+import Info from './Info';
 
 export default function ProductosYServicios() {
   
@@ -13,6 +14,7 @@ export default function ProductosYServicios() {
       <h1>Productos Y Servicios</h1>
       {informacion && <p>Has clicado en: {informacion}</p>}
       {/* Resto del contenido de la página */}
+      <Info />
     </div>
   )
 }

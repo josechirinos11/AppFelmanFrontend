@@ -1,0 +1,35 @@
+/* RolesYPermisos.css */
+.roles-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centra las tarjetas horizontalmente */
+    gap: 20px; /* Espacio entre tarjetas */
+    padding: 20px; /* Espacio alrededor del contenedor */
+}
+
+.rol-card {
+    width: 250px; /* Ancho fijo para las tarjetas */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s; /* Transición para el efecto hover */
+    display: flex;
+    flex-direction: column; /* Alinea icono, título y menú verticalmente */
+    align-items: center; /* Centra el contenido horizontalmente */
+    text-align: center; /* Centra el texto dentro de la tarjeta */
+    cursor: pointer; /* Indica que la tarjeta es clickable */
+}
+
+.rol-card:hover {
+    transform: translateY(-5px); /* Eleva la tarjeta al pasar el cursor */
+}
+
+.rol-icon {
+    margin-bottom: 10px;
+    color: #007bff; /* Color azul para los iconos */
+}
+
+.rol-title {
+    color: #333; /* Color de texto más oscuro */
+}

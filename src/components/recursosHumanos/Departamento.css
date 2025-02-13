@@ -1,0 +1,52 @@
+/* Departamento.css */
+.departamento-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centra las tarjetas horizontalmente */
+    gap: 20px; /* Espacio entre tarjetas */
+    padding: 20px; /* Espacio alrededor del contenedor */
+}
+
+.departamento-card {
+    width: 250px; /* Ancho fijo para las tarjetas */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s; /* Transición para el efecto hover */
+    display: flex;
+    flex-direction: column; /* Alinea icono, título y menú verticalmente */
+    align-items: center; /* Centra el contenido horizontalmente */
+    text-align: center; /* Centra el texto dentro de la tarjeta */
+}
+
+.departamento-card:hover {
+    transform: translateY(-5px); /* Eleva la tarjeta al pasar el cursor */
+}
+
+.departamento-icon {
+    margin-bottom: 10px;
+    color: #007bff; /* Color azul para los iconos */
+}
+
+.departamento-title {
+    margin-bottom: 10px;
+    color: #333; /* Color de texto más oscuro */
+}
+
+.departamento-submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.departamento-submenu-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.departamento-submenu-item:hover {
+    background-color: #f0f0f0; /* Color de fondo claro al pasar el cursor */
+}

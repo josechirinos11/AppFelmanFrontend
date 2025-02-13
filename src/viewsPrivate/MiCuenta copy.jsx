@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
 import Alerta from '../components/Alerta';
 import clienteAxios from '../config/axios';
 import felmanImage from '../img/felman.png';
 import { useAuth } from '../config/AuthContext';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import srcIMG from '../img/MERN_Stack-Photoroom.png';
 
 export default function MiCuenta() {
   //const { usuario } = useAuth();
@@ -20,89 +19,78 @@ export default function MiCuenta() {
   const website2 = "Si la vida te da oportunidades, aprovéchalas. Si no te las da, créalas.";
 
 
+ 
+const UserLocalstorage = localStorage.getItem('usuario')
+// Convertir la cadena JSON de nuevo a un objeto
+const usuarioObjeto = UserLocalstorage ? JSON.parse(UserLocalstorage) : null;
 
-  const UserLocalstorage = localStorage.getItem('usuario')
-  // Convertir la cadena JSON de nuevo a un objeto
-  const usuarioObjeto = UserLocalstorage ? JSON.parse(UserLocalstorage) : null;
-
-
+ 
   return (
     <div>
       <p>
         Micuenta
       </p>
       {(UserLocalstorage) ? (
-        <>
-          <p>Nombre: {usuarioObjeto.nombreUSER}</p>
-          <p>Email: {usuarioObjeto.emailUSER}</p>
+                <>
+                    <p>Nombre: {usuarioObjeto.nombreUSER}</p>
+                    <p>Email: {usuarioObjeto.emailUSER}</p>
 
+                      <motion.div
+                                className="info-container"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.5 }}
+                            >
 
-          <motion.div
-            className="info-container"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            style={{ display: "flex", flexDirection: "column" }} 
-          >
-            <motion.h2 // Componente motion.h2
-              initial={{ opacity: 0, scale: 0.8 }} // Animación inicial
-              animate={{ opacity: 1, scale: 1 }} // Animación al aparecer
-              transition={{ duration: 0.5, type: "spring", stiffness: 100 }} // Transición
-              style={{ textAlign: "center", marginBottom: "20px", color: "#333", paddingTop: 0  }} // Estilos
-            >
-              Tecnologías utilizadas en esta aplicación
-            </motion.h2>
-            <CardContainer
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, type: 'spring' }}
-            >
-              <BrowserFrame>
-                <BrowserHeader>
-                  <BrowserControls>
-                    <ControlButton red />
-                    <ControlButton yellow />
-                    <ControlButton green />
-                  </BrowserControls>
-                  <UrlBar>{website2}</UrlBar>
-                </BrowserHeader>
-                <IframeContainer
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3 }}
+                    <CardContainer
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, type: 'spring' }}
                 >
-                  <div className="info-card">
-                    <a href={website} target="_blank" rel="noopener noreferrer">
-                      <img
-                        src={srcIMG} // Asegúrate de tener la imagen de vista previa
-                        alt="Vista previa del sitio"
-                        className="info-thumbnail"
-                      />
-                    </a>
-                  </div>
-                </IframeContainer>
-              </BrowserFrame>
-              <ShineEffect />
-              <GlowEffect />
-            </CardContainer>
+                    <BrowserFrame>
+                        <BrowserHeader>
+                            <BrowserControls>
+                                <ControlButton red />
+                                <ControlButton yellow />
+                                <ControlButton green />
+                            </BrowserControls>
+                            <UrlBar>{website2}</UrlBar>
+                        </BrowserHeader>
+                        <IframeContainer
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.3 }}
+                        >
+                            <div className="info-card">
+                                <h1 className="info-message">{mensaje}</h1>
+                                <div className="info-contact">
+                                    <h1>Correo: {correo}</h1>
+                                    <h1>Teléfono: {telefono}</h1>
+                                </div>
+                            </div>
+                        </IframeContainer>
+                    </BrowserFrame>
+                    <ShineEffect />
+                    <GlowEffect />
+                </CardContainer>
 
-          </motion.div>
+                </motion.div>
 
 
-        </>
-      ) : (
-        <p>No estás autenticado.</p>
-      )}
+                </>
+            ) : (
+                <p>No estás autenticado.</p>
+            )}
     </div>
   )
-
+  
 }
 
 
 // Estilos con styled-components (integrados aquí)
 const CardContainer = styled(motion.div)`
     position: relative;
-    max-width: auto; /* Ajusta este valor según necesites */
+    max-width: 800px; /* Ajusta este valor según necesites */
     margin: 2rem auto;
     border-radius: 20px;
     background: rgba(25, 25, 25, 0.8);
