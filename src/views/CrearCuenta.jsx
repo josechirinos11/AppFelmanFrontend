@@ -68,6 +68,8 @@ export default function CrearCuenta() {
             email: false,
             password: false,
             repetirPassword: false,
+            confirmado: true,
+
         });
 
         // Verificaciones de campos vacíos
@@ -120,7 +122,7 @@ export default function CrearCuenta() {
         try {
             await clienteAxios.post('/usuarios', { nombre, email, password });
             setAlerta({
-                msg: 'Usuario Creado Correctamente, revisa tu email para confirmar cuenta, Seras redireccionado al LOGIN',
+                msg: 'Usuario Creado Correctamente, Por los momentos no necesita de confirmacion de email, Seras redireccionado al LOGIN',
                 error: false,
             });
             // Redirigir a la pantalla de inicio de sesión después de 1 segundo

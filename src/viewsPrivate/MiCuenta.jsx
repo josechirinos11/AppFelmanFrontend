@@ -48,7 +48,7 @@ export default function MiCuenta() {
               initial={{ opacity: 0, scale: 0.8 }} // Animación inicial
               animate={{ opacity: 1, scale: 1 }} // Animación al aparecer
               transition={{ duration: 0.5, type: "spring", stiffness: 100 }} // Transición
-              style={{ textAlign: "center", marginBottom: "20px", color: "#333", paddingTop: 0  }} // Estilos
+              style={{ textAlign: "center", marginBottom: "20px", color: "#333", paddingTop: 10  }} // Estilos
             >
             TECNOLOGIAS USADAS EN ESTA APLICACION
                             <br /> {/* Salto de línea */}
