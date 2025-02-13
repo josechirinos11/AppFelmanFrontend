@@ -6,7 +6,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
      // Estado para seleccionar el color de fondo
-     const [vista, setVista] = useState('moderno'); // Por defecto, "claro"
+     const [vista, setVista] = useState('claro'); // Por defecto, "claro"
     const [token, setToken] = useState(localStorage.getItem('token') || null);
     const [usuario, setUsuario] = useState(() => {
         const storedUsuario = localStorage.getItem('usuario');

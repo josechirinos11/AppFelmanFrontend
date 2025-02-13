@@ -20,7 +20,7 @@ export default function DashboardView() {
             navigate('/mi-cuenta'); // Ajusta la ruta según tus necesidades
         } else {
             // Si no hay token, puedes redirigir al usuario a la página de login o hacer algo más
-            navigate('/');
+            navigate('/crear-cuenta');
         }
     }, [token, navigate]);
 

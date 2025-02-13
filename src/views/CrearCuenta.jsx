@@ -6,10 +6,10 @@ import felmanImage from '../img/YouApp.png';
 import './Views.css';
 
 export default function CrearCuenta() {
-    const [nombre, setNombre] = useState('jose chirinos');
-    const [email, setEmail] = useState('josechirinos11@gmail.com');
-    const [password, setPassword] = useState('123456');
-    const [repetirPassword, setRepetirPassword] = useState('123456');
+    const [nombre, setNombre] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [repetirPassword, setRepetirPassword] = useState('');
 
     const [errorInput, setErrorInput] = useState({
         nombre: false,

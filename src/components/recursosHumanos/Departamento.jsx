@@ -28,7 +28,7 @@ const Departamento = () => {
     };
 
     fetchData();
-    console.log("departamentos:   ",data)
+    console.log("departamentos en carga:   ",data)
   }, [informacion]);
 
 
