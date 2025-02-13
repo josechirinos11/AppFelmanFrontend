@@ -10,9 +10,9 @@ const AgregarUsuarioTrabajador = ({ onClose, onAdd }) => {
     const usuarioContexto = usuario || JSON.parse(localStorage.getItem('usuario'));
    
     const [newTrabajador, setNewTrabajador] = useState({
-      "nombre": "trabajador No",
-      "email": "No@correo.com",
-      "password": "123456",
+      "nombre": "",
+      "email": "",
+      "password": "",
       "usuarioId": usuarioContexto.idUSER,
       "rol": []  // Aquí agregamos los roles al estado del trabajador
     });

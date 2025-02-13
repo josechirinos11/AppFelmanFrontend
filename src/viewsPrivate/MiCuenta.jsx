@@ -50,7 +50,11 @@ export default function MiCuenta() {
               transition={{ duration: 0.5, type: "spring", stiffness: 100 }} // Transición
               style={{ textAlign: "center", marginBottom: "20px", color: "#333", paddingTop: 0  }} // Estilos
             >
-              Tecnologías utilizadas en esta aplicación
+            TECNOLOGIAS USADAS EN ESTA APLICACION
+                            <br /> {/* Salto de línea */}
+                            Verifica CRUD en:
+                            <br /> {/* Salto de línea */}
+                            Recursos Humanos / Empleados
             </motion.h2>
             <CardContainer
               initial={{ opacity: 0, y: 20 }}
